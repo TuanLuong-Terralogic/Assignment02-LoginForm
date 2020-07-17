@@ -1,0 +1,18 @@
+@mixin inpStyle($border-radius, $fs, $pd-inp) {
+  border-radius: $border-radius;
+  // padding: $pd-x $pd-y;
+  font-size: $fs;
+  padding: $pd-inp;
+  margin-bottom: 20px;
+}
+
+@mixin labelStyle {
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  margin-bottom: 10px;
+  color: $color-gray-400;
+}

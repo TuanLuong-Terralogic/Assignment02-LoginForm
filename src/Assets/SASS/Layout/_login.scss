@@ -1,0 +1,78 @@
+.container {
+  .login-container {
+    margin-top: 30px;
+    padding: 50px 150px;
+    .row {
+      margin: 0;
+      .col-6 {
+        &.col-left {
+          padding-left: 0;
+          text-align: left;
+          .brand {
+            img {
+              margin-bottom: 20px;
+            }
+            small {
+              text-transform: uppercase;
+              color: $color-gray-400;
+            }
+          }
+          h3 {
+            margin-top: 20px;
+            font-weight: 600;
+          }
+          .form-container {
+            margin-top: 20px;
+            .form-group {
+              width: 100%;
+              label {
+                @include labelStyle;
+                &.form-check-label {
+                  margin-left: 20px;
+                }
+              }
+              input[type="text"] {
+                @include inpStyle(20px, 14px, $pd-inp);
+                background: url(../../../Assets/img/Suche.svg) no-repeat scroll
+                  7px 11px;
+              }
+              input[type="password"] {
+                @include inpStyle(20px, 14px, $pd-inp);
+                background: url(../../../Assets/img/Suche02.svg) no-repeat
+                  scroll 7px 11px;
+                position: relative;
+                &.form-control::before {
+                  content: "";
+                  background: url(../../../Assets/img/Suche03.svg) no-repeat
+                    scroll 10px 10px;
+                  background-position: right;
+                  top: 10px;
+                  left: 100px;
+                }
+              }
+
+              .btn {
+                &.btn-register {
+                }
+                &.btn-login {
+                }
+              }
+              input[type="checkbox"] {
+                margin-left: 0px;
+              }
+              ::placeholder {
+                margin-left: 7px;
+              }
+            }
+          }
+        }
+        &.img-container {
+          padding-right: 0;
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
