@@ -20,6 +20,7 @@ const Login = props => {
 
                 <label htmlFor="password">Password</label>
                 <input type="password" name="password" id="password" ref={password} className="form-control form-password" placeholder="Enter your password" required />
+                <i class="fa fa-eye"></i>
                 
 
                 <button type="button" className="btn btn-register">Register</button>
