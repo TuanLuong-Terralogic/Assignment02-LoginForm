@@ -3,7 +3,7 @@ import LoginLayout from '../Layout/LoginLayout';
 
 const LoginPage = () => {
     return (
-        <div className="container">
+        <div className="wrapper">
             <div className="login-container">
                 <LoginLayout />
             </div>

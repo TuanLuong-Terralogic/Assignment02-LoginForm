@@ -1,12 +1,17 @@
-.container {
+.wrapper {
+  width: 80%;
+  margin: auto;
+  margin-top: 30px;
+  // text-align: center;
   .login-container {
-    margin-top: 30px;
+    margin: auto;
     padding: 50px 150px;
+    box-shadow: 8px 8px 20px 2px gray;
     .row {
       margin: 0;
-      .col-6 {
+      .col-xl-6 {
         &.col-left {
-          padding-left: 0;
+          padding: 0;
           text-align: left;
           .brand {
             img {
@@ -22,7 +27,10 @@
             font-weight: 600;
           }
           .form-container {
+            // width: 60%;
             margin-top: 20px;
+            margin: auto;
+            // margin-left: 0;
             .form-group {
               width: 100%;
               label {
@@ -31,49 +39,53 @@
                   margin-left: 20px;
                 }
               }
-              input[type="text"] {
+              input[type='text'] {
                 @include inpStyle(20px, 14px, $pd-inp);
-                background: url(../../../Assets/img/Suche.svg) no-repeat scroll
-                  7px 11px;
-                  width: 350px;
+                background: url(../../../Assets/img/Suche.svg) no-repeat scroll 7px 11px;
+                width: 100%;
               }
-              input[type="password"] {
+              input[type='password'] {
                 @include inpStyle(20px, 14px, $pd-inp);
-                background: url(../../../Assets/img/Suche02.svg) no-repeat
-                  scroll 7px 11px;
+                background: url(../../../Assets/img/Suche02.svg) no-repeat scroll 7px 11px;
                 position: relative;
-                width: 350px;
+                width: 100%;
 
                 &.form-control::before {
-                    font-family: Font Awesome 5 Free;
-                  content: "\f06e ";
-                //   background: url(../../../Assets/img/Suche03.svg) no-repeat
-                //     scroll 10px 10px;
-                //   background-position: right;
+                  font-family: Font Awesome 5 Free;
+                  content: '\f06e ';
+                  //   background: url(../../../Assets/img/Suche03.svg) no-repeat
+                  //     scroll 10px 10px;
+                  //   background-position: right;
                   top: 10px;
                   left: 100px;
                 }
               }
-              i.fa{
-                  z-index: 9999;
+              i.fa {
+                z-index: 9999;
               }
 
-              .btn {
-                &.btn-register {
-                    @include btnStyle($color-white, 20px, 14px, 11px 0px, #000);
+              .button-row {
+                display: flex;
+                justify-content: flex-end;
+                .btn {
+                  text-align: center;
+                  margin: auto;
+                  &.btn-register {
+                    @include btnStyle($color-white, 20px, 14px, $pd-btn-2, #000);
                     border: 1px solid $color-pink-terralogic;
-                    margin-right: 30px;
-                    width: 160px;
-                    text-align: center;
-                }
 
-                &.btn-login {
+                    // margin-right: 30px;
+                    // width: 160px;
+                  }
+
+                  &.btn-login {
                     @include btnStyle($color-pink-terralogic, 20px, 14px, $pd-btn-2, $color-white);
-                    width: 160px;
-
+                    // width: 160px;
+                  }
                 }
               }
-              input[type="checkbox"] {
+
+              input[type='checkbox'] {
                 margin-left: 0px;
               }
               ::placeholder {
