@@ -22,3 +22,13 @@
     @include inpStyle($border-radius, $fs, $pd-inp);
     color: $text-color;
 }
+
+@mixin txtStyle($color, $fw){
+  color: $color;
+  font-weight: $fw;
+}
+
+@mixin widHei($w, $h){
+  width: $w;
+  height: $h;
+}

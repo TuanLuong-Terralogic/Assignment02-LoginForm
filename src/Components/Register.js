@@ -1,18 +1,18 @@
 import React, { useRef } from 'react';
 import eye from '../Assets/img/Suche03.svg';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-const Login = props => {
+const Register = props => {
 
     const email = useRef("");
     const password = useRef("");
-    const type = "";
-    // const 
+    const confirmPassword = useRef("");
+    const fullName = useRef("");
+    const phone = useRef("");
 
     const handleOnSubmit = () => {
-        console.log(email.current.value);
-        console.log(password.current.value);
+
     }
 
     return (
@@ -27,27 +27,33 @@ const Login = props => {
                     <img src={eye} className="eye" alt="password display" />
                 </div>
 
-                <div className="button-row">
-                    <button type="button" className="btn btn-register">
-                        <Link to="/register" className="register">Register</Link>
-                    </button>
-                    <button type="button" className="btn btn-login" onClick={handleOnSubmit}>
-                        <Link to="/profile" className="login">Login</Link>
-                    </button>
+                <div className="pass-wrapper">
+                    <label htmlFor="password">Password</label>
+                    <input type="password" name="password" id="password" ref={confirmPassword} className="form-control form-password" placeholder="Enter your password" required />
+                    <img src={eye} className="eye" alt="password display" />
                 </div>
 
-                {/* <div className="check-container"> */}
-                <br />
-                <input type="checkbox" className="form-check-input" name="rememberPass" id="rememberPass" value="checkedValue" />
-                <label className="form-check-label">Remember password</label>
-                {/* </div> */}
+                <label htmlFor="email">Full Name</label>
+                <input type="text" name="email" id="email" ref={fullName} className="form-control" placeholder="Enter your full name" required />
+
+                <label htmlFor="email">Phone number</label>
+                <input type="text" name="email" id="email" ref={phone} className="form-control" placeholder="Enter your phone number" required />
+
+                <div className="button-row">
+                    <button type="button" className="btn btn-register">
+                        <Link to="/register" className="register">Back</Link>
+                    </button>
+                    <button type="button" className="btn btn-login" onClick={handleOnSubmit}>
+                        <Link to="/profile" className="login">Register</Link>
+                    </button>
+                </div>
             </div>
         </div>
     );
 };
 
-Login.propTypes = {
+Register.propTypes = {
 
 };
 
-export default Login;
+export default Register;

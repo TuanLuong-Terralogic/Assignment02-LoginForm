@@ -1,14 +1,33 @@
 import React from 'react';
 import './Assets/SASS/main.scss';
 import './App.css';
-import LoginPage from './Page/LoginPage';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import thunk from 'redux-thunk';
+import {createStore, applyMiddleware, compose} from 'redux';
 
+import rootReducer from './Reducer/rootReducer';
+import LoginLayout from './Layout/LoginLayout';
+import RegisterLayout from './Layout/RegisterLayout';
+
+const store = createStore(
+  rootReducer,
+  compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    ),
+)
 
 function App() {
   return (
-    <div className="App">
-      <LoginPage />
-    </div>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route path="/" exact component={LoginLayout} />
+          <Route path="/register" exact component={RegisterLayout} />
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
 

@@ -1,10 +1,9 @@
 import React from 'react';
-import Login from '../Components/Login';
+import Register from '../Components/Register';
 import Logo from '../Components/Logo';
 import Images from '../Components/Images';
 
-
-const LoginLayout = () => {
+const RegisterLayout = () => {
     return (
         <div className="wrapper">
             <div className="login-container">
@@ -12,7 +11,7 @@ const LoginLayout = () => {
                     <div className="col-12 col-md-12 col-lg-12 col-xl-6 col-left">
                         <Logo />
                         <h3>Login Your Account</h3>
-                        <Login />
+                        <Register />
                     </div>
                     <Images />
                 </div>
@@ -21,4 +20,4 @@ const LoginLayout = () => {
     );
 };
 
-export default LoginLayout;
+export default RegisterLayout;
