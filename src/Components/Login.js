@@ -1,11 +1,12 @@
-import React, { Fragment, useRef } from 'react';
-import eye from '../Assets/img/Suche03.svg';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 const Login = props => {
 
     const email = useRef("");
     const password = useRef("");
+    const type = "";
+    // const 
 
     const handleOnSubmit = () => {
         console.log(email.current.value);
@@ -19,7 +20,7 @@ const Login = props => {
                 <input type="text" name="email" id="email" ref={email} className="form-control" placeholder="Enter your email" required />
 
                 <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="password" ref={password} className="form-control form-password" placeholder="Enter your password" required />
+                <input type={type} name="password" id="password" ref={password} className="form-control form-password" placeholder="Enter your password" required />
                 <i class="fa fa-eye"></i>
                 
 
