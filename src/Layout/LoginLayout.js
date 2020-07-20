@@ -7,7 +7,7 @@ import Images from './Images';
 const LoginLayout = () => {
     return (
         <div className="row">
-            <div className="col-6 col-left">
+            <div className="col-12 col-md-12 col-lg-12 col-xl-6 col-left">
                 <Logo />
                 <h3>Login Your Account</h3>
                 <Login />
