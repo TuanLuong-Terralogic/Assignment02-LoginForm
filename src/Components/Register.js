@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import eye from '../Assets/img/Suche03.svg';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Register = props => {
 
@@ -12,12 +13,23 @@ const Register = props => {
     const phone = useRef("");
 
     const handleOnSubmit = () => {
-
+        if(email.current.value === "" &&
+        password.current.value === "" &&
+        confirmPassword.current.value === "" &&
+        fullName.current.value === "" &&
+        phone.current.value === ""){
+            Swal.fire({
+                title: 'Error!',
+                text: 'Nhap vo di thang lol',
+                icon: 'error',
+                confirmButtonText: 'Cool'
+              })
+        }
     }
 
     return (
         <div className="form-container">
-            <div className="form-group">
+            <div className="form-group" onSubmit={handleOnSubmit}>
                 <label htmlFor="email">Email</label>
                 <input type="text" name="email" id="email" ref={email} className="form-control" placeholder="Enter your email" required />
 
@@ -28,7 +40,7 @@ const Register = props => {
                 </div>
 
                 <div className="pass-wrapper">
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">Confirm Password</label>
                     <input type="password" name="password" id="password" ref={confirmPassword} className="form-control form-password" placeholder="Enter your password" required />
                     <img src={eye} className="eye" alt="password display" />
                 </div>
@@ -41,10 +53,10 @@ const Register = props => {
 
                 <div className="button-row">
                     <button type="button" className="btn btn-register">
-                        <Link to="/register" className="register">Back</Link>
+                        <Link to="/" className="register">Back</Link>
                     </button>
-                    <button type="button" className="btn btn-login" onClick={handleOnSubmit}>
-                        <Link to="/profile" className="login">Register</Link>
+                    <button type="button" className="btn btn-login">
+                        Register
                     </button>
                 </div>
             </div>
