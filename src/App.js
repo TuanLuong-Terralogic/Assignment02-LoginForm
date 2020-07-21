@@ -9,6 +9,7 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import rootReducer from './Reducer/rootReducer';
 import LoginLayout from './Layout/LoginLayout';
 import RegisterLayout from './Layout/RegisterLayout';
+import ProfileLayout from './Layout/ProfileLayout';
 
 const store = createStore(
   rootReducer,
@@ -25,6 +26,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={LoginLayout} />
           <Route path="/register" exact component={RegisterLayout} />
+          <Route path="/profile" exact component={ProfileLayout} />
         </Switch>
       </Router>
     </Provider>

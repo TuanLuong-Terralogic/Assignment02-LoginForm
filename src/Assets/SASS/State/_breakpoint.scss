@@ -15,6 +15,24 @@
     }
   }
 
+  .detail{
+    .form-group{
+      &.full-name{
+        width: 100% !important;
+        font-size: 16px;
+        .form-control{
+          width:100% !important;
+          font-size: 16px !important;
+        }
+      }
+    }
+  }
+  .eye{
+      right: 10px !important;
+  }
+  .btn-logout{
+    margin:0 !important;
+  }
 }
 
 @media only screen and (max-width: 1200px){

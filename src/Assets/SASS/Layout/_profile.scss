@@ -1,0 +1,147 @@
+.wrapper {
+  .login-container {
+    .profile {
+      box-shadow: 5px 5px 5px 5px $color-gray-200;
+      .header-container {
+        height: 129px;
+        background-color: $color-purple-terralogic;
+        color: $color-white;
+        padding: 28px 92px;
+        border-top-right-radius: $bd-rad-1;
+        border-top-left-radius: $bd-rad-1;
+        h2 {
+          @include txtStyle($color-white, $fw-bold);
+          margin-bottom: 12px;
+        }
+        p {
+          @include txtStyle($color-white, $fw-200);
+          opacity: 0.8;
+        }
+      }
+      .profile-wrapper {
+        border-bottom-left-radius: $bd-rad-1;
+        border-bottom-right-radius: $bd-rad-1;
+        padding: 33px 92px;
+        .ava-wrapper {
+          @include widHei(100%, 80px);
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin-bottom: 30px;
+          .ava-container {
+            @include widHei(80px, 80px);
+            position: relative;
+            margin-right: 24px;
+            img {
+              &.avatar {
+                width: 100%;
+                border-radius: 50%;
+              }
+              &.edit {
+                @include widHei(33px, 33px);
+                position: absolute;
+                top: -5px;
+                right: -5px;
+                cursor: pointer;
+              }
+            }
+          }
+          .user-name {
+            p {
+              @include txtStyle($color-blue-name, $fw-bold);
+              font-size: 2rem;
+            }
+          }
+        }
+
+        .detail {
+          width: 100%;
+          margin-bottom: 30px;
+          .form-group {
+            &.full-name {
+              position: relative;
+              width: 50%;
+              .eye{
+                position: absolute;
+                top: 19px;
+                right: 65px;
+                width: 30px;
+                cursor: pointer;
+              }
+              .lbl-extend {
+                font-size: 1rem;
+                @include txtStyle($color-black-label, $fw-normal);
+                position: absolute;
+                top: -10px;
+                left: 10px;
+                background-color: $color-white;
+                padding: 2px 5px;
+              }
+              .form-control {
+                width: 90%;
+                height: 60px;
+                @include inpStyle($bd-rad-1, 1rem, 19px 14px);
+                @include txtStyle($color-black-label, $fw-600);
+                font-size: 18px;
+                &:focus {
+                  box-shadow: none;
+                  border-color: $color-gray-200;
+                }
+              }
+            }
+          }
+          .row {
+            .form-group {
+              padding: 0;
+            //   position: relative;
+              @extend .full-name;
+            }
+          }
+        }
+
+        .change-pass {
+            margin-bottom: 10px;
+          p {
+            @include txtStyle($color-gray-200, $fw-normal);
+            font-size: 18px;
+            margin-bottom: 30px;
+          }
+        }
+
+        .btn-profile{
+            .btn-save {
+                @include btnStyle(
+                    $pd-btn-1,
+                    2px solid $color-pink-terralogic,
+                    $bd-rad-3,
+                    1.5rem, 
+                    $fw-bold,
+                    $color-white,
+                    $color-pink-terralogic,
+                    $color-white,
+                    $color-pink-terralogic,
+                    $fw-bold,
+                    2px solid $color-pink-terralogic
+                )
+            }
+            .btn-logout {
+                margin-left: 30px;
+                @include btnStyle(
+                    15px 45px,
+                    2px solid $color-pink-terralogic,
+                    $bd-rad-3,
+                    1.5rem, 
+                    $fw-bold,
+                    $color-pink-terralogic,
+                    $color-white,
+                    $color-pink-terralogic,
+                    $color-white,
+                    $fw-bold,
+                    2px solid $color-pink-terralogic
+                )
+            }
+        }
+      }
+    }
+  }
+}

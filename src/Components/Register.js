@@ -20,10 +20,26 @@ const Register = props => {
         phone.current.value === ""){
             Swal.fire({
                 title: 'Error!',
-                text: 'Nhap vo di thang lol',
+                text: 'Please fill in the field',
                 icon: 'error',
-                confirmButtonText: 'Cool'
+                confirmButtonText: 'OK'
               })
+        }
+        else if(password.current.value === confirmPassword.current.value){
+            console.log(email.current.value, password.current.value, fullName.current.value, phone.current.value)
+        Swal.fire({
+            title: 'Success!',
+            text: 'Register Success',
+            icon: 'success',
+            confirmButtonText: 'Great'
+        });
+
+        //reset form
+        email.current.value = ""
+        password.current.value = "" 
+        confirmPassword.current.value = ""
+        fullName.current.value = ""
+        phone.current.value = ""
         }
     }
 
@@ -55,7 +71,7 @@ const Register = props => {
                     <button type="button" className="btn btn-register">
                         <Link to="/" className="register">Back</Link>
                     </button>
-                    <button type="button" className="btn btn-login">
+                    <button type="button" className="btn btn-login" onClick={handleOnSubmit}>
                         Register
                     </button>
                 </div>
@@ -65,7 +81,7 @@ const Register = props => {
 };
 
 Register.propTypes = {
-
+    
 };
 
 export default Register;

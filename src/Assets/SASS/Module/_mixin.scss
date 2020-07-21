@@ -17,10 +17,21 @@
   color: $color-gray-400;
 }
 
-@mixin btnStyle($bg,$border-radius, $fs, $pd-inp, $text-color){
-    background-color: $bg;
-    @include inpStyle($border-radius, $fs, $pd-inp);
-    color: $text-color;
+@mixin btnStyle($p, $bd, $radius, $fs, $fw, $color, $bg, $bg-hov, $color-hov, $fw-hov, $bor-hov ){
+  @include inpStyle($radius, $fs, $p);
+  border: $bd;
+  @include txtStyle($color, $fw);
+  background-color: $bg;
+  transition: all 0.5s;
+  &:hover{
+    background-color: $bg-hov;
+    @include txtStyle($color-hov, $fw-hov);
+    border: $bor-hov;
+    a{
+      color: $color-hov;
+      text-decoration: none;
+    }
+  }
 }
 
 @mixin txtStyle($color, $fw){

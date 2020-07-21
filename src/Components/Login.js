@@ -32,7 +32,7 @@ const Login = props => {
                         <Link to="/register" className="register">Register</Link>
                     </button>
                     <button type="button" className="btn btn-login" onClick={handleOnSubmit}>
-                        <Link to="/profile" className="login">Login</Link>
+                        Login
                     </button>
                 </div>
 
