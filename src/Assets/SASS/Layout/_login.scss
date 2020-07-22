@@ -40,7 +40,7 @@
                   margin-left: 20px;
                 }
               }
-              input[type="text"] {
+              .text-field {
                 @include inpStyle(20px, 14px, $pd-inp);
                 background: url(../../../Assets/img/Suche.svg) no-repeat scroll
                   7px 11px;
