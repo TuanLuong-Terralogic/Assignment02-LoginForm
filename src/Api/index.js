@@ -1,6 +1,6 @@
 import axios from 'axios';
 const api = axios.create({
-    baseURL: "https://api-terralogic-training.firebaseapp.com/api"
+    baseURL: "http://api.terralogic.ngrok.io/api/"
 });
 
 export default api;

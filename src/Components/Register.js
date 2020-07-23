@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
-import eye from '../Assets/img/Suche03.svg';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Input from './Input';
 
 const Register = props => {
 
@@ -41,31 +41,25 @@ const Register = props => {
         fullName.current.value = ""
         phone.current.value = ""
         }
+
     }
 
     return (
         <div className="form-container">
             <div className="form-group" onSubmit={handleOnSubmit}>
-                <label htmlFor="email">Email</label>
-                <input type="text" name="email" id="email" ref={email} className="form-control" placeholder="Enter your email" required />
+                <Input clName="form-group" labelName="Email" type="text" plHol="Enter your email" ref={email}/>
 
-                <div className="pass-wrapper">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" ref={password} className="form-control form-password" placeholder="Enter your password" required />
-                    <img src={eye} className="eye" alt="password display" />
-                </div>
+               
+                <Input clName="pass-wrapper" labelName="Password" defVal="" type="password" plHol="Enter your password" ref={password} />
+                <Input clName="pass-wrapper" labelName="Confirm Password" defVal="" type="password" plHol="Enter your password" ref={confirmPassword} />
 
-                <div className="pass-wrapper">
-                    <label htmlFor="password">Confirm Password</label>
-                    <input type="password" name="password" id="password" ref={confirmPassword} className="form-control form-password" placeholder="Enter your password" required />
-                    <img src={eye} className="eye" alt="password display" />
-                </div>
+                
 
-                <label htmlFor="email">Full Name</label>
-                <input type="text" name="email" id="email" ref={fullName} className="form-control" placeholder="Enter your full name" required />
+                
+                <Input clName="form-group" labelName="Full name" type="text" plHol="Enter your name" ref={fullName}/>
 
-                <label htmlFor="email">Phone number</label>
-                <input type="text" name="email" id="email" ref={phone} className="form-control" placeholder="Enter your phone number" required />
+               
+                <Input clName="form-group" labelName="Phone number" type="text" plHol="Enter your phone" ref={phone}/>
 
                 <div className="button-row">
                     <button type="button" className="btn btn-register">

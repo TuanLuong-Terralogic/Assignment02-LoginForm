@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Login from '../Components/Login';
 import Logo from '../Components/Logo';
 import Images from '../Components/Images';
@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {login} from '../Action/user';
 
 
-const LoginLayout = ({user ={}, login}) => {
+const LoginLayout = ({user ={}, login, isAuthenticated}) => {
 
     const handleSubmit = async (email, password) => {
         login(email, password);
@@ -19,7 +19,7 @@ const LoginLayout = ({user ={}, login}) => {
                     <div className="col-12 col-md-12 col-lg-12 col-xl-6 col-left">
                         <Logo />
                         <h3>Login Your Account</h3>
-                        <Login handleSubmit={handleSubmit} />
+                        <Login handleSubmit={handleSubmit} user={user} isAuthenticated/>
                     </div>
                     <Images />
                 </div>
@@ -30,7 +30,8 @@ const LoginLayout = ({user ={}, login}) => {
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user,
+        isAuthenticated: state.user.isAuthenticated
     }
 }
 

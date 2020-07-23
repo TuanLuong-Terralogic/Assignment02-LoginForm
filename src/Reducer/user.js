@@ -8,14 +8,24 @@ const initState={
 };
 
 const user = (state = initState, action) =>{
-    switch (action.type) {
+    const {type, payload} = action
+    switch (type) {
         case Types.LOGIN_SUCCESS:
-            localStorage.setItem('token', action.payload.token);
+            localStorage.setItem('token', payload.token);
             return {
                 ...state,
-                ...action.payload,
+                ...payload,
                 // msg: action.payload,
                 isAuthenticated: true,
+                loading: false
+            };
+        
+        case Types.LOGIN_FAIL:
+            localStorage.removeItem('token');
+            return{
+                ...state,
+                token: null,
+                isAuthenticated: false,
                 loading: false
             }
         default:
