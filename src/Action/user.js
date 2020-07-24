@@ -29,4 +29,34 @@ export const login = (email, password) => async dispatch => {
     }
 }
 
-// 
+// Register
+export const register = (email, password, fullName, phone) => async dispatch => {
+    const config = {
+        Headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    const body = JSON.stringify({email, password, fullName, phone});
+
+    try {
+        const res = await api.post("register", config, body);
+
+        dispatch({
+            type: Types.REGISTER_SUCCESS,
+            payload: res.data
+        })
+    } catch (err) {
+        const errors = err.response.data.msg;
+        console.log(errors);
+
+        dispatch({
+            type: Types.REGISTER_FAIL
+        })
+    }
+}
+
+// logout
+export const logout = () => dispatch => {
+    dispatch({type: Types.LOGOUT});
+}

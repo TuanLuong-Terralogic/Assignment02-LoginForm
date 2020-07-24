@@ -10,6 +10,7 @@ import rootReducer from './Reducer/rootReducer';
 import LoginLayout from './Layout/LoginLayout';
 import RegisterLayout from './Layout/RegisterLayout';
 import ProfileLayout from './Layout/ProfileLayout';
+import UserAuth from './Auth/UserAuth';
 
 const store = createStore(
   rootReducer,
@@ -26,7 +27,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={LoginLayout} />
           <Route path="/register" exact component={RegisterLayout} />
-          <Route path="/profile" exact component={ProfileLayout} />
+          <UserAuth path="/profile" exact component={ProfileLayout} />
         </Switch>
       </Router>
     </Provider>

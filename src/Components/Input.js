@@ -3,13 +3,14 @@ import eye from '../Assets/img/Suche03.svg';
 
 const Input = React.forwardRef(({ clName = "", labelName = "", defVal = "", type = "", onClick, plHol = ""}, ref) => {
     const [click, setClick] = useState(false);
+    const [hide, setHide] = useState(false);
     const handleClick = () => {
         onClick(setClick(!click));
     }
 
     return (
         <Fragment>
-            {type === "password" ?
+            {type === "password"  ?
                 <div className={clName}>
                     <label className="lbl-extend">{labelName}</label>
                     <input type={type} name={labelName} className="form-control" defaultValue={defVal} placeholder={plHol} ref={ref}/>

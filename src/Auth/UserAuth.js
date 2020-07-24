@@ -1,5 +1,8 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types'
+
 
 const UserAuth = ({component : Component, user: {isAuthenticated, loading}, ...props}) => {
     return (
@@ -14,4 +17,14 @@ const UserAuth = ({component : Component, user: {isAuthenticated, loading}, ...p
     );
 };
 
-export default UserAuth;
+UserAuth.propTypes = {
+    user: PropTypes.object.isRequired,
+}
+
+const mapStateToProps = state => {
+    return{
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps)(UserAuth);
