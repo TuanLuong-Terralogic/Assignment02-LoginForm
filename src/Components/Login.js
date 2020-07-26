@@ -1,79 +1,80 @@
-import React, { useRef, useState } from 'react';
-// import eye from '../Assets/img/Suche03.svg';
+import React, { useState } from 'react';
+import eye from '../Assets/img/Suche03.svg';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Input from './Input';
-import {useFormik} from 'formik';
-import * as Yup from 'yup';
+// import Input from './Input';
 
-const Login = ({ handleSubmit, user, isAuthenticated }) => {
+const Login = ({ handleSubmit, user: { msg }, isAuthenticated }) => {
 
-    const [type, setType] = useState("password");
-    // const [isClicked, setIsClicked] = useState(false);
-    // const 
+    const [click, setClick] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const regEx = /^[a-z][a-z0-9_.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/;
 
-    const onClick = (click) => {
 
-        if (!click) {
-            setType("text")
-            return type;
-        }
-        // console.log(type);
-        return type;
+    const handleClick = () => {
+        setClick(!click);
     }
 
     const handleOnSubmit = async e => {
         e.preventDefault();
-        handleSubmit(formik.values.email.current.value, formik.values.password.current.value);
-
+        console.log(email, password)
+        console.log(regEx.test(email));
+        if (!regEx.test(email)) {
+            return (
+                window.alert("Invalid email format")
+            )
+        }
+        handleSubmit(email, password);
     }
 
-    const formik = useFormik({
-        initialValues:{
-            email: useRef(""),
-            password: useRef("")
-        },
-        validationSchema: Yup.object({
-            email: Yup.string().email("Invalid email format").required("Email required"),
-            password: Yup.string().required("Password required")
-        }),
-        // onSubmit: 
-    })
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+    }
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+    }
+
 
     const submit = event => {
-        if(event.keycode === 13){
-            console.log("12323231");
-            handleOnSubmit(formik.values.email.current.value, formik.values.password.current.value);
+        if (event.keycode === 13) {
+
+            // handleOnSubmit();
         }
     }
 
     return (
-        <div className="form-container">
-            <form onSubmit={handleOnSubmit} onKeyDown={e => submit}>
-            <Input clName="form-group" labelName="Email" type="text" plHol="Enter your email" ref={formik.values.email}/>
-            {formik.errors.email && formik.touched.email && (
-            <p>{formik.errors.email}</p>
-          )}
-            {/* <div className="pass-wrapper">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" ref={password} className="form-control form-password" placeholder="Enter your password" required />
-                    <img src={eye} className="eye" alt="password display" />
-                </div> */}
-            <div className="form-group">
-                <Input clName="pass-wrapper" labelName="Password" defVal="" type={type} onClick={onClick} plHol="Enter your password" ref={formik.values.password} />
 
-                <div className="button-row">
-                    <button type="button" className="btn btn-register">
-                        <Link to="/register" className="register">Register</Link>
-                    </button>
-                    <button type="submit" className="btn btn-login" >
-                        Login
-                    </button>
+        <div className="form-container">
+            <p>{msg}</p>
+            <form onSubmit={handleOnSubmit} onKeyDown={e => submit}>
+
+                <Input clName="form-group" labelName="Email" type="email" plHol="Enter your email" value={email} onChange={handleEmailChange} />
+
+
+                <Input clName="form-group" labelName="Password" type="password" value={password} onChange={handlePasswordChange} plHol="Enter your password" />
+
+                <div className="form-group">
+                    <div className="button-row row">
+                        <div className="col-6">
+                            <button type="button" className="btn btn-register w-100">
+                                <Link to="/register" className="register">Register</Link>
+                            </button>
+                        </div>
+                        <div className="col-6">
+                            <button type="submit" className="btn btn-login w-100" >
+                                Login
+                            </button>
+                        </div>
+
+
+                    </div>
+                    <br />
+                    <input type="checkbox" className="form-check-input" name="rememberPass" id="rememberPass" value="checkedValue" />
+                    <label className="form-check-label">Remember password</label>
                 </div>
-                <br />
-                <input type="checkbox" className="form-check-input" name="rememberPass" id="rememberPass" value="checkedValue" />
-                <label className="form-check-label">Remember password</label>
-            </div>
             </form>
         </div>
     );

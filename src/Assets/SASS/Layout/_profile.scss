@@ -1,7 +1,7 @@
 .wrapper {
   .login-container {
     .profile {
-      box-shadow: 5px 5px 5px 5px $color-gray-200;
+      // box-shadow: 5px 5px 5px 5px $color-gray-200;
       .header-container {
         height: 129px;
         background-color: $color-purple-terralogic;
@@ -58,10 +58,11 @@
           width: 100%;
           margin-bottom: 30px;
           .form-group {
+            // padding: 0;
             &.full-name {
               position: relative;
               width: 50%;
-              .eye{
+              .eye {
                 position: absolute;
                 top: 19px;
                 right: 65px;
@@ -75,7 +76,7 @@
                 top: -10px;
                 left: 10px;
                 background-color: $color-white;
-                padding: 2px 5px;
+                padding: 2px 10px;
               }
               .form-control {
                 width: 90%;
@@ -83,24 +84,66 @@
                 @include inpStyle($bd-rad-1, 1rem, 19px 14px);
                 @include txtStyle($color-black-label, $fw-600);
                 font-size: 18px;
+                // &input[type='text'] {
+                //   width: 88%;
+                // }
                 &:focus {
                   box-shadow: none;
                   border-color: $color-gray-200;
                 }
               }
+              .eye {
+                right: 103px;
+              }
             }
           }
           .row {
             .form-group {
-              padding: 0;
-            //   position: relative;
-              @extend .full-name;
+              // padding: 0;
+              //   position: relative;
+              // @extend .full-name;
+
+              position: relative;
+              width: 50%;
+              .eye {
+                position: absolute;
+                top: 19px;
+                right: 65px;
+                width: 30px;
+                cursor: pointer;
+              }
+              .lbl-extend {
+                font-size: 1rem;
+                @include txtStyle($color-black-label, $fw-normal);
+                position: absolute;
+                top: -10px;
+                left: 10px;
+                background-color: $color-white;
+                padding: 2px 10px;
+              }
+              .form-control {
+                width: 91.3%;
+                height: 60px;
+                @include inpStyle($bd-rad-1, 1rem, 19px 14px);
+                @include txtStyle($color-black-label, $fw-600);
+                font-size: 18px;
+                // &input[type='text'] {
+                //   width: 88%;
+                // }
+                &:focus {
+                  box-shadow: none;
+                  border-color: $color-gray-200;
+                }
+              }
+              .eye {
+                right: 90px;
+              }
             }
           }
         }
 
         .change-pass {
-            margin-bottom: 10px;
+          margin-bottom: 10px;
           p {
             @include txtStyle($color-gray-200, $fw-normal);
             font-size: 18px;
@@ -108,38 +151,38 @@
           }
         }
 
-        .btn-profile{
-            .btn-save {
-                @include btnStyle(
-                    $pd-btn-1,
-                    2px solid $color-pink-terralogic,
-                    $bd-rad-3,
-                    1.5rem, 
-                    $fw-bold,
-                    $color-white,
-                    $color-pink-terralogic,
-                    $color-white,
-                    $color-pink-terralogic,
-                    $fw-bold,
-                    2px solid $color-pink-terralogic
-                )
-            }
-            .btn-logout {
-                margin-left: 30px;
-                @include btnStyle(
-                    15px 45px,
-                    2px solid $color-pink-terralogic,
-                    $bd-rad-3,
-                    1.5rem, 
-                    $fw-bold,
-                    $color-pink-terralogic,
-                    $color-white,
-                    $color-pink-terralogic,
-                    $color-white,
-                    $fw-bold,
-                    2px solid $color-pink-terralogic
-                )
-            }
+        .btn-profile {
+          .btn-save {
+            @include btnStyle(
+              11px 0,
+              2px solid $color-pink-terralogic,
+              $bd-rad-3,
+              1.5rem,
+              $fw-bold,
+              $color-white,
+              $color-pink-terralogic,
+              $color-white,
+              $color-pink-terralogic,
+              $fw-bold,
+              2px solid $color-pink-terralogic
+            );
+          }
+          .btn-logout {
+            // margin-left: 30px;
+            @include btnStyle(
+              11px 0,
+              2px solid $color-pink-terralogic,
+              $bd-rad-3,
+              1.5rem,
+              $fw-bold,
+              $color-pink-terralogic,
+              $color-white,
+              $color-pink-terralogic,
+              $color-white,
+              $fw-bold,
+              2px solid $color-pink-terralogic
+            );
+          }
         }
       }
     }

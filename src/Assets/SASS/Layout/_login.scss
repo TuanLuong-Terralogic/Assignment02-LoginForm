@@ -1,12 +1,12 @@
-.wrapper {
-  width: 95%;
+.container {
+  // width: 95%;
   margin: auto;
   margin-top: 30px;
   .login-container {
     width: 100%;
     margin: auto;
-    padding: 50px 150px;
-    box-shadow: 8px 8px 20px 2px gray;
+    // padding: 50px 150px;
+    // box-shadow: 8px 8px 20px 2px gray;
     .row {
       margin: 0;
       .col-xl-6 {
@@ -42,8 +42,7 @@
               }
               .text-field {
                 @include inpStyle(20px, 14px, $pd-inp);
-                background: url(../../../Assets/img/Suche.svg) no-repeat scroll
-                  7px 11px;
+                background: url(../../../Assets/img/Suche.svg) no-repeat scroll 7px 11px;
                 width: 100%;
                 border: 1px solid $color-gray-border;
                 &:focus {
@@ -55,11 +54,11 @@
                 width: 100%;
                 position: relative;
                 margin-bottom: 20px;
-                
-                input[type="password"] {
+
+                input[type='password'],
+                input[type='text'] {
                   @include inpStyle(20px, 14px, $pd-inp);
-                  background: url(../../../Assets/img/Suche02.svg) no-repeat
-                    scroll 7px 11px;
+                  background: url(../../../Assets/img/Suche02.svg) no-repeat scroll 7px 11px;
                   width: 100%;
                   margin-bottom: 0;
                   border: 1px solid $color-gray-border;
@@ -77,59 +76,68 @@
               }
 
               .button-row {
-                display: flex;
-                justify-content: space-between;
-                .btn {
-                  text-align: center;
-                  margin: auto;
-                  &:focus {
-                    outline: none;
-                    box-shadow: none;
+                // display: flex;
+                // justify-content: space-between;
+                .col-6 {
+                  &:first-child {
+                    padding-left: 0;
                   }
-                  &.btn-register {
-                    @include btnStyle(
-                      11px 54px, 
-                      2px solid $color-pink-terralogic,
-                      $bd-rad-2,
-                      14px,
-                      $fw-bold,
-                      $color-pink-terralogic,
-                      $color-white,
-                      $color-pink-terralogic,
-                      $color-white, $fw-bold,2px solid $color-pink-terralogic
-                    );
-                    margin-left: 0;
-                    margin-bottom: 0;
-                    .register{
-                      @include txtStyle($color-pink-terralogic, $fw-bold);
+                  &:last-child {
+                    padding-right: 0;
+                  }
+                  .btn {
+                    // text-align: center;
+                    // margin: auto;
+                    &:focus {
+                      outline: none;
+                      box-shadow: none;
                     }
-                  }
+                    &.btn-register {
+                      @include btnStyle(
+                        11px 54px,
+                        2px solid $color-pink-terralogic,
+                        $bd-rad-2,
+                        14px,
+                        $fw-bold,
+                        $color-pink-terralogic,
+                        $color-white,
+                        $color-pink-terralogic,
+                        $color-white,
+                        $fw-bold,
+                        2px solid $color-pink-terralogic
+                      );
+                      margin-bottom: 0;
+                      .register {
+                        @include txtStyle($color-pink-terralogic, $fw-bold);
+                      }
+                    }
 
-                  &.btn-login {
-                    @include btnStyle(
-                      $pd-btn-2, 
-                      2px solid $color-pink-terralogic,
-                      $bd-rad-2,
-                      14px,
-                      $fw-bold,
-                      $color-white,
-                      $color-pink-terralogic,
-                      $color-white,
-                      $color-pink-terralogic, $fw-bold,
-                      2px solid $color-pink-terralogic
-                    );
-                    margin-right: 0;
-                    margin-bottom: 0;
-                    .login{
-                      @include txtStyle($color-white, $fw-bold);
-                      text-decoration: none;
+                    &.btn-login {
+                      @include btnStyle(
+                        $pd-btn-2,
+                        2px solid $color-pink-terralogic,
+                        $bd-rad-2,
+                        14px,
+                        $fw-bold,
+                        $color-white,
+                        $color-pink-terralogic,
+                        $color-white,
+                        $color-pink-terralogic,
+                        $fw-bold,
+                        2px solid $color-pink-terralogic
+                      );
+                      margin-bottom: 0;
 
+                      .login {
+                        @include txtStyle($color-white, $fw-bold);
+                        text-decoration: none;
+                      }
                     }
                   }
                 }
               }
 
-              input[type="checkbox"] {
+              input[type='checkbox'] {
                 margin-left: 0px;
               }
               ::placeholder {

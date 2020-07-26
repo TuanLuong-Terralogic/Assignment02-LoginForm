@@ -1,18 +1,26 @@
 import React from 'react';
 import ProfileHeader from '../Components/ProfileHeader';
 import Profile from '../Components/Profile';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-const ProfileLayout = () => {
+const ProfileLayout = ({ user }) => {
     return (
         <div className="wrapper">
             <div className="login-container">
                 <div className="profile">
                     <ProfileHeader />
-                    <Profile />
-                 </div>
+                    <Profile user={user} />
+                </div>
             </div>
         </div>
     );
 };
 
-export default ProfileLayout;
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps)(ProfileLayout);

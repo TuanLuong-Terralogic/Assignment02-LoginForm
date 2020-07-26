@@ -5,7 +5,7 @@ import Images from '../Components/Images';
 
 const RegisterLayout = () => {
     return (
-        <div className="wrapper">
+        <div className="container">
             <div className="login-container">
                 <div className="row">
                     <div className="col-12 col-md-12 col-lg-12 col-xl-6 col-left">

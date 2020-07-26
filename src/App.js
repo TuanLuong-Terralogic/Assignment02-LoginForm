@@ -4,20 +4,21 @@ import './App.css';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import thunk from 'redux-thunk';
-import {createStore, applyMiddleware, compose} from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 
 import rootReducer from './Reducer/rootReducer';
 import LoginLayout from './Layout/LoginLayout';
 import RegisterLayout from './Layout/RegisterLayout';
 import ProfileLayout from './Layout/ProfileLayout';
 import UserAuth from './Auth/UserAuth';
+// import Loading from './Components/Loading';
 
 const store = createStore(
   rootReducer,
   compose(
     applyMiddleware(thunk),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    ),
+  ),
 )
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <UserAuth path="/profile" exact component={ProfileLayout} />
         </Switch>
       </Router>
+      {/* <Loading /> */}
     </Provider>
   );
 }
