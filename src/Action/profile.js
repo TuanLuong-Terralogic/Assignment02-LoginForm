@@ -9,7 +9,7 @@ export const uploadAvatar = async (avatar) => dispatch => {
     }
   };
 
-  const body = ;
+  // const body = ;
 
   try {
     const res = api.post('upload', config, body);
