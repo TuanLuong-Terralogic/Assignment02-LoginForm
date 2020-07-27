@@ -1,18 +1,19 @@
-import * as Types from '../Constant/profile';
+import * as Type from '../Constant/profile';
 import api from '../Api';
 
-export const uploadAvatar = async (avatar) => dispatch => {
-  const config = {
-    Headers: {
-      'Content-Type': 'multipart/form-data',
 
-    }
-  };
+export const uploadAvatar = async (avatar) => dispatch => {
+  // const config = {
+  //   Headers: {
+  //     'Content-Type': 'multipart/form-data',
+
+  //   }
+  // };
 
   // const body = ;
 
   try {
-    const res = api.post('upload', config, body);
+    // const res = api.post('upload', config, avatar);
 
     dispatch({
 
@@ -22,7 +23,7 @@ export const uploadAvatar = async (avatar) => dispatch => {
   }
 }
 
-export const changePassword = async (password) => dispatch => {
+export const changePassword =  (password) => async dispatch => {
   const config = {
     Headers: {
       'Content-Type': 'application/json'
@@ -33,14 +34,14 @@ export const changePassword = async (password) => dispatch => {
     const res = await api.post('changePassword', config, password);
 
     dispatch({
-      type: Types.CHANGEPASSWORD_SUCCESS,
+      type: Type.CHANGEPASSWORD_SUCCESS,
       payload: res.data
     })
   } catch (error) {
-    const err = error.response.error.msg;
+    // const err = error.response.error.msg;
 
     dispatch({
-      type: Types.CHANGEPASSWORD_FAIL
+      type: Type.CHANGEPASSWORD_FAIL
     })
   }
 

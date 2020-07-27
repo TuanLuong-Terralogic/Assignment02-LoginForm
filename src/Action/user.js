@@ -1,5 +1,23 @@
 import * as Types from '../Constant/alert';
 import api from '../Api';
+import jwt from 'jsonwebtoken';
+import Swal from 'sweetalert2';
+
+// user loaded
+export const userLoaded = () => dispatch => {
+    if(localStorage.token){
+        const profile = jwt.decode(localStorage.token)
+        dispatch({
+            type: Types.USER_LOADED,
+            payload: profile
+        })
+    }
+    else {
+        dispatch({
+            type: Types.AUTH_ERROR
+        })
+    }
+}
 
 // Login 
 export const login = (email, password) => async dispatch => {
@@ -12,43 +30,54 @@ export const login = (email, password) => async dispatch => {
 
     try {
         const res = await api.post("login", body, config);
-
+        
         dispatch({
             type: Types.LOGIN_SUCCESS,
             payload: res.data
-        })
-        // console.log(res.data);
+        });
+        dispatch(Swal.fire({
+            icon:'success',
+            title: res.data.msg,
+            showConfirmButton: true,
+        }));
     } catch (err) {
-        // console.error(err.response.data.msg);
-        const error = err.response.data.msg;
-        console.log(error);
+        const errors = err.response;
+        console.log(errors)
         dispatch({
-            type: Types.LOGIN_FAIL
+            type: Types.LOGIN_FAIL,
         })
         
     }
 }
 
 // Register
-export const register = (email, password, fullName, phone) => async dispatch => {
+export const register = (email, password, name, phone) => async dispatch => {
     const config = {
-        Headers: {
+        headers: {
             'Content-Type': 'application/json'
         }
     };
 
-    const body = JSON.stringify({email, password, fullName, phone});
+    const body = JSON.stringify({email, password, name, phone});
 
     try {
-        const res = await api.post("register", config, body);
+        const res = await api.post("register", body, config);
 
         dispatch({
             type: Types.REGISTER_SUCCESS,
             payload: res.data
-        })
+        });
+        dispatch(Swal.fire({
+            icon:'success',
+            title: res.data.msg,
+            showConfirmButton: true,
+        }));
     } catch (err) {
         const errors = err.response.data.msg;
-        console.log(errors);
+        console.log(errors)
+        // if(errors){
+        //     errors.forEach(error => dispatch(setAlert(error, 'danger', 5000)));
+        // }
 
         dispatch({
             type: Types.REGISTER_FAIL

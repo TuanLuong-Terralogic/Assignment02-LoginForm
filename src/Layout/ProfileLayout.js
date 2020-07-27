@@ -4,13 +4,13 @@ import Profile from '../Components/Profile';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const ProfileLayout = ({ user }) => {
+const ProfileLayout = ({profile, user }) => {
     return (
         <div className="wrapper">
             <div className="login-container">
                 <div className="profile">
                     <ProfileHeader />
-                    <Profile user={user} />
+                    <Profile user={user} profile={profile}/>
                 </div>
             </div>
         </div>
@@ -19,7 +19,8 @@ const ProfileLayout = ({ user }) => {
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user,
+        profile: state.profile
     }
 }
 

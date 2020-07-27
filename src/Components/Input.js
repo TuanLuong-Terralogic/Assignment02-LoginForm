@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import eye from '../Assets/img/Suche03.svg';
+import eyeFilled from '../Assets/img/Suche04.svg';
 
-const Input = React.forwardRef(({ clName = "", labelName = "", type = "", plHol = "", onChange, value }, ref) => {
+const Input = ({ clName = "", labelName = "", type = "", plHol = "", name, eyeType, onChange, value }) => {
     const [click, setClick] = useState(false);
     const handleClick = () => {
         setClick(!click);
@@ -16,20 +17,20 @@ const Input = React.forwardRef(({ clName = "", labelName = "", type = "", plHol 
                     <div className={clName}>
                         <div className="pass-wrapper">
                             <label className="lbl-extend pl-2">{labelName}</label>
-                            <input type={click ? "text" : "password"} name={labelName} className="form-control" value={value} onChange={onChange} placeholder={plHol} required />
-                            <img src={eye} alt="Watching eye" className="eye" onClick={handleClick} />
+                            <input type={click ? "text" : "password"} name={name} className="form-control" value={value} onChange={onChange} placeholder={plHol} />
+                            <img src={eyeType === 'eye' ? eye : eyeFilled} alt="Watching eye" className="eye" onClick={handleClick} />
                         </div>
                     </div>
                 </Fragment>
                 :
                 <div className={clName}>
                     <label className="lbl-extend pl-2">{labelName}</label>
-                    <input type={type} name={labelName} className="form-control text-field" value={value} onChange={onChange} placeholder={plHol} required />
+                    <input type={type} name={name} className="form-control text-field" value={value} onChange={onChange} placeholder={plHol} />
                 </div>
             }
         </Fragment>
 
     );
-});
+};
 
 export default Input;

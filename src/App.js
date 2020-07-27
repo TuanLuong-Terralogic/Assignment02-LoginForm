@@ -1,39 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Assets/SASS/main.scss';
 import './App.css';
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import thunk from 'redux-thunk';
-import { createStore, applyMiddleware, compose } from 'redux';
 
-import rootReducer from './Reducer/rootReducer';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import LoginLayout from './Layout/LoginLayout';
 import RegisterLayout from './Layout/RegisterLayout';
 import ProfileLayout from './Layout/ProfileLayout';
 import UserAuth from './Auth/UserAuth';
+import {userLoaded} from './Action/user';
+// import Alert from './Components/Alert';
+import {connect} from 'react-redux';
 // import Loading from './Components/Loading';
 
-const store = createStore(
-  rootReducer,
-  compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  ),
-)
 
-function App() {
+
+const createBrowserHistory = require ('history').createBrowserHistory;
+const App = ({userLoaded}) => {
+
+  const history = createBrowserHistory();
+  
+
+  useEffect(()=> {
+    userLoaded();
+  }, []);
+
   return (
-    <Provider store={store}>
-      <Router>
+    
+      <Router history={history}>
+        {/* <Alert /> */}
         <Switch>
           <Route path="/" exact component={LoginLayout} />
           <Route path="/register" exact component={RegisterLayout} />
           <UserAuth path="/profile" exact component={ProfileLayout} />
         </Switch>
       </Router>
-      {/* <Loading /> */}
-    </Provider>
   );
 }
 
-export default App;
+export default connect(null, {userLoaded})(App);

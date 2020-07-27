@@ -1,41 +1,27 @@
 import React, { useState } from 'react';
-import eye from '../Assets/img/Suche03.svg';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, withRouter, Redirect } from 'react-router-dom';
 import Input from './Input';
-// import Input from './Input';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+import Swal from 'sweetalert2';
 
-const Login = ({ handleSubmit, user: { msg }, isAuthenticated }) => {
+const Login = ({ handleSubmit, user: { msg, isAuthenticated, loading }, history }) => {
 
     const [click, setClick] = useState(false);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const regEx = /^[a-z][a-z0-9_.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/;
-
-    const handleClick = () => {
-        setClick(!click);
-    }
-
-    const handleOnSubmit = async e => {
-        e.preventDefault();
-        console.log(email, password)
-        console.log(regEx.test(email));
-        if (!regEx.test(email)) {
-            return (
-                window.alert("Invalid email format")
-            )
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: ''
+        },
+        validationSchema: Yup.object().shape({
+            email: Yup.string().email("Invalid email format").required('Required'),
+            password: Yup.string().min(8, "Minimum 8 characters").max(16, "Maximum 16 characters").required('Required')
+        }),
+        onSubmit: async (values) => {
+            await handleSubmit(values.email, values.password);
         }
-        handleSubmit(email, password);
-    }
-
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-    }
-
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-    }
-
+    })
 
     const submit = event => {
         if (event.keycode === 13) {
@@ -44,16 +30,28 @@ const Login = ({ handleSubmit, user: { msg }, isAuthenticated }) => {
         }
     }
 
+    if (isAuthenticated) {
+        return <Redirect to='/profile' />
+    }
+
+    const handleClick = () => {
+        if (loading) {
+            setClick(!click);
+        }
+        return click
+    }
+
     return (
 
         <div className="form-container">
-            <p>{msg}</p>
-            <form onSubmit={handleOnSubmit} onKeyDown={e => submit}>
+            {/* <p>{msg}</p> */}
+            <form onSubmit={formik.handleSubmit} onKeyDown={e => submit}>
 
-                <Input clName="form-group" labelName="Email" type="email" plHol="Enter your email" value={email} onChange={handleEmailChange} />
+                <Input clName="form-group" labelName="Email" name="email" type="email" plHol="Enter your email" value={formik.values.email} onChange={formik.handleChange} />
+                {formik.errors.email && formik.touched.email && (<p className="text-danger">{formik.errors.email}</p>)}
 
-
-                <Input clName="form-group" labelName="Password" type="password" value={password} onChange={handlePasswordChange} plHol="Enter your password" />
+                <Input clName="form-group" labelName="Password" name="password" type="password" eyeType="eye" value={formik.values.password} onChange={formik.handleChange} plHol="Enter your password" />
+                {formik.errors.password && formik.errors.password && (<p className="text-danger">{formik.errors.password}</p>)}
 
                 <div className="form-group">
                     <div className="button-row row">
@@ -63,8 +61,8 @@ const Login = ({ handleSubmit, user: { msg }, isAuthenticated }) => {
                             </button>
                         </div>
                         <div className="col-6">
-                            <button type="submit" className="btn btn-login w-100" >
-                                Login
+                            <button type="submit" className="btn btn-login w-100" onClick={handleClick}>
+                                {click ? "...Loading" : "Login"}
                             </button>
                         </div>
 
@@ -83,4 +81,4 @@ Login.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
 };
 
-export default Login;
+export default withRouter(Login);
