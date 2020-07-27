@@ -1,6 +1,6 @@
 import * as Types from '../Constant/alert';
 import jwt from 'jsonwebtoken';
-const initState={
+const initState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
     msg: '',
@@ -8,8 +8,8 @@ const initState={
     user: null
 };
 
-const user = (state = initState, action) =>{
-    const {type, payload} = action
+const user = (state = initState, action) => {
+    const { type, payload } = action
     switch (type) {
         // case Types.GET_USER:
         //     return {
@@ -29,7 +29,7 @@ const user = (state = initState, action) =>{
             }
         case Types.REGISTER_SUCCESS:
             localStorage.removeItem('token');
-            return{
+            return {
                 ...state,
                 ...payload,
                 isAuthenticated: true,
@@ -45,17 +45,18 @@ const user = (state = initState, action) =>{
                 msg: payload.msg,
                 loading: false
             };
-        
-            // case Types.GET_USER_FAIL:
+
+        // case Types.GET_USER_FAIL:
         case Types.REGISTER_FAIL:
         case Types.LOGOUT:
         case Types.AUTH_ERROR:
         case Types.LOGIN_FAIL:
             localStorage.removeItem('token');
-            return{
+            return {
                 ...state,
+                token: null,
                 isAuthenticated: false,
-                // msg: payload,
+                msg: payload,
                 loading: false,
             }
         default:

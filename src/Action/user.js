@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 
 // user loaded
 export const userLoaded = () => dispatch => {
-    if(localStorage.token){
+    if (localStorage.token) {
         const profile = jwt.decode(localStorage.token)
         dispatch({
             type: Types.USER_LOADED,
@@ -30,23 +30,27 @@ export const login = (email, password) => async dispatch => {
 
     try {
         const res = await api.post("login", body, config);
-        
+
+        dispatch(Swal.fire({
+            icon: 'success',
+            title: res.data.msg,
+            showConfirmButton: true,
+        }));
+
         dispatch({
             type: Types.LOGIN_SUCCESS,
             payload: res.data
         });
-        dispatch(Swal.fire({
-            icon:'success',
-            title: res.data.msg,
-            showConfirmButton: true,
-        }));
+
     } catch (err) {
-        const errors = err.response;
-        console.log(errors)
+        const errors = err.response.data.errors;
+        if (errors) {
+            console.log(errors.msg)
+        }
         dispatch({
             type: Types.LOGIN_FAIL,
         })
-        
+
     }
 }
 
@@ -58,7 +62,7 @@ export const register = (email, password, name, phone) => async dispatch => {
         }
     };
 
-    const body = JSON.stringify({email, password, name, phone});
+    const body = JSON.stringify({ email, password, name, phone });
 
     try {
         const res = await api.post("register", body, config);
@@ -68,7 +72,7 @@ export const register = (email, password, name, phone) => async dispatch => {
             payload: res.data
         });
         dispatch(Swal.fire({
-            icon:'success',
+            icon: 'success',
             title: res.data.msg,
             showConfirmButton: true,
         }));
@@ -87,5 +91,5 @@ export const register = (email, password, name, phone) => async dispatch => {
 
 // logout
 export const logout = () => dispatch => {
-    dispatch({type: Types.LOGOUT});
+    dispatch({ type: Types.LOGOUT });
 }

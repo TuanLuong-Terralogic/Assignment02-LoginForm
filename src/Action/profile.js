@@ -23,25 +23,32 @@ export const uploadAvatar = async (avatar) => dispatch => {
   }
 }
 
-export const changePassword =  (password) => async dispatch => {
+export const changePassword = (password, currentPassword) => async dispatch => {
+  const token = localStorage.getItem('token');
+
   const config = {
-    Headers: {
-      'Content-Type': 'application/json'
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     }
   }
 
+  const body = JSON.stringify({ password, currentPassword });
+
   try {
-    const res = await api.post('changePassword', config, password);
+    const res = await api.post('changePassword', config, body);
 
     dispatch({
       type: Type.CHANGEPASSWORD_SUCCESS,
       payload: res.data
     })
   } catch (error) {
-    // const err = error.response.error.msg;
+    const err = error.response.errors.msg;
+    console.log(err);
 
     dispatch({
-      type: Type.CHANGEPASSWORD_FAIL
+      type: Type.CHANGEPASSWORD_FAIL,
+      payload: err
     })
   }
 
