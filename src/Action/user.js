@@ -35,22 +35,23 @@ export const login = (email, password) => async dispatch => {
             try {
                 // const res = await api.post("login", body, config);
 
-                
+
 
                 dispatch({
                     type: Types.LOGIN_SUCCESS,
                     payload: res.data
                 });
-                dispatch(()=>{
+                dispatch(() => {
                     Swal.fire({
-                    icon: 'success',
-                    title: res.data.msg,
-                    showConfirmButton: true,
-                })});
+                        icon: 'success',
+                        title: res.data.msg,
+                        showConfirmButton: true,
+                    })
+                });
                 dispatch(userLoaded());
 
             } catch (err) {
-                const errors = err.response.data.msg;
+                const errors = err.response.data;
                 dispatch(() => Swal.fire({
                     icon: 'error',
                     title: errors,

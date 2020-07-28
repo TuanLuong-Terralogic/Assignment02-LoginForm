@@ -8,15 +8,21 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 
 
-const Profile = ({ user: { loading, isAuthenticated }, handleClick, history, handleSubmit }) => {
+const Profile = ({ user: { loading, isAuthenticated }, handleUploadImage, handleClick, history, handleSubmit }) => {
     const userLocal = localStorage.getItem('user');
     const userData = JSON.parse(userLocal);
 
-    const [image, setImage] = useState('');
+    const [image, setImage] = useState(null);
 
     const handleChange = e => {
-        // setImage(URL.createObjectURL(e.target.value));
-        // console.log(image);
+        setImage(e.target.files[0]);
+        // console.log(e.target.files[0]);
+        console.log(image)
+    }
+
+    const handleOnSubmit = async e => {
+        e.preventDefault();
+        handleUploadImage(image);
     }
 
     // Reg Exp
@@ -24,7 +30,6 @@ const Profile = ({ user: { loading, isAuthenticated }, handleClick, history, han
     // const phoneRegEx = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
 
     const formik = useFormik({
-        enableReinitialize: true,
         initialValues: {
             name: userData.name,
             oldPass: '',
@@ -36,9 +41,10 @@ const Profile = ({ user: { loading, isAuthenticated }, handleClick, history, han
             newPass: yup.string().min(8, 'At least 8 character').max(16, 'Maximum 16 characters').matches(passRegEx, 'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character'),
             confirmPass: yup.string().oneOf([yup.ref('newPass')], "Password is not match"),
         }),
-        onSubmit: values => {
+        onSubmit: async (values, e) => {
             // await handleSubmit(values.newPass, values.oldPass);
-            console.log(values.avatar.files[0])
+            // console.log(values.avatar.files[0])
+            await handleOnSubmit(e.target.files[0]);
         },
 
     })
@@ -56,8 +62,10 @@ const Profile = ({ user: { loading, isAuthenticated }, handleClick, history, han
                         {
                             !isAuthenticated ? <Fragment><Loading /></Fragment> :
                                 <div className="profile-wrapper">
+
                                     <form onSubmit={formik.handleSubmit} >
                                         <Avatar userProfile={userData.displayName} value={image} onChange={handleChange} name="avatar" id="avatar" />
+
                                         <div className="detail">
                                             <div className="row">
                                                 <div className="col-md-12 col-lg-6 col-xl-6">

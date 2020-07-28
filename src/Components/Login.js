@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import Swal from 'sweetalert2';
 
-const Login = ({ handleSubmit, user: { msg, isAuthenticated, loading }, history }) => {
+const Login = ({ handleSubmit, user: { msg, isAuthenticated, loading } }) => {
 
     const [click, setClick] = useState(false);
     const formik = useFormik({
@@ -40,6 +40,13 @@ const Login = ({ handleSubmit, user: { msg, isAuthenticated, loading }, history 
         }
         return click
     }
+    // const emailRegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    // const validateEmail = (email) => {
+    //     if(email !== "") {
+    //         if(email)
+    //     }
+    // }
 
     return (
 

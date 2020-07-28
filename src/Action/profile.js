@@ -2,25 +2,45 @@ import * as Type from '../Constant/profile';
 import api from '../Api';
 import Swal from 'sweetalert2';
 
-export const uploadAvatar = async (avatar) => dispatch => {
-  // const 
+export const uploadAvatar = async (file) => dispatch => {
+  const token = localStorage.getItem('token');
   const config = {
-    Headers: {
+    headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': 'bearer '
+      'Authorization': 'bearer ' + token
     }
   };
 
-  // const body = ;
+  const body = new FormData();
+  body.append('image', file)
 
   try {
-    // const res = api.post('upload', config, avatar);
+    const res = api.post('upload', body, config);
 
     dispatch({
+      type: Type.UPLOAD_SUCCESS,
+      payload: res.data
+    });
 
+    dispatch(() => {
+      Swal.fire({
+        icon: 'success',
+        title: res.data.msg,
+        showConfirmButton: true
+      });
     })
   } catch (error) {
-
+    const errors = error.response.data;
+    dispatch({
+      type: Type.UPLOAD_FAIL
+    });
+    dispatch(() => {
+      Swal.fire({
+        icon: 'error',
+        title: errors,
+        showConfirmButton: true
+      })
+    })
   }
 }
 
@@ -77,7 +97,7 @@ export const updateProfile = (email, name, phone) => async dispatch => {
     }
   }
 
-  const body = JSON.stringify({email, name, phone});
+  const body = JSON.stringify({ email, name, phone });
 
   try {
     const res = await api.patch('update', body, config);
