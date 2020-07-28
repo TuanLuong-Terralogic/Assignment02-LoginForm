@@ -20,6 +20,13 @@ const profile = (state = initState, action) => {
         msg: action.payload.msg,
         loading: false
       }
+    case Types.UPLOAD_FAIL:
+      return {
+        ...state,
+        ...action.payload,
+        msg: action.payload,
+        loading: false
+      }
     case Types.CHANGEPASSWORD_SUCCESS:
       return {
         ...state,
@@ -31,7 +38,23 @@ const profile = (state = initState, action) => {
       return {
         ...state,
         ...action.payload,
-        loading: false
+        loading: false,
+        msg: action.payload
+      }
+
+    case Types.UPDATE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        loading: false,
+        msg: action.payload.msg
+      }
+    case Types.UPDATE_PROFILE_FAIL:
+      return {
+        ...state,
+        ...action.payload,
+        loading: false,
+        msg: action.payload
       }
 
     default:

@@ -2,13 +2,16 @@ import React, { Fragment, useState } from 'react';
 import eye from '../Assets/img/Suche03.svg';
 import eyeFilled from '../Assets/img/Suche04.svg';
 
-const Input = ({ clName = "", labelName = "", type = "", plHol = "", name, eyeType, onChange, value }) => {
+const Input = ({ clName = "", labelName = "",id = "", type = "", plHol = "", name, eyeType, onChange, value }) => {
     const [click, setClick] = useState(false);
+    // const [isFocused, setIsFocused] = useState(true);
     const handleClick = () => {
         setClick(!click);
     }
 
-
+    // const handleFocus = () => {
+    //     setIsFocused(!isFocused);
+    // }
 
     return (
         <Fragment>
@@ -25,7 +28,7 @@ const Input = ({ clName = "", labelName = "", type = "", plHol = "", name, eyeTy
                 :
                 <div className={clName}>
                     <label className="lbl-extend pl-2">{labelName}</label>
-                    <input type={type} name={name} className="form-control text-field" value={value} onChange={onChange} placeholder={plHol} />
+                    <input type={type} name={name} id={id} className="form-control text-field" value={value} onChange={onChange} placeholder={plHol}  />
                 </div>
             }
         </Fragment>

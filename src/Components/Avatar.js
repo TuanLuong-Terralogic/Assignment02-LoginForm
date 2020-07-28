@@ -1,28 +1,21 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import edit from '../Assets/img/edit_photo.svg';
 
-const Avatar = ({ userProfile }) => {
+const Avatar = ({ userProfile, value, onChange,name, id }) => {
 
-    const [uploadFile, setUploadFile] = useState('');
-    const [click, setClick] = useState(false);
-
-    const handleChange = e => {
-        setUploadFile(e.target.files[0]);
-        console.log(URL.createObjectURL(e.target.files[0]));
+    const handleClick = () => {
+        inpRef.current.click();
     }
 
-    const handleClick = e => {
-        setClick(true);
-    }
-
+    const inpRef = useRef(null);
 
     return (
         <div className="ava-wrapper">
             <div className="ava-container">
-                <img src="https://png.pngtree.com/png-clipart/20190906/original/pngtree-520-couple-avatar-girl-avatar-little-dinosaur-cartoon-cute-png-image_4563357.jpg" alt="avatar" className="avatar" />
+                <img src={value} alt="avatar" className="avatar" />
                 <img type="file" src={edit} alt="edit pencil" className="edit" onClick={handleClick} />
-                <input type="file" value={uploadFile} onChange={handleChange} />
+                <input type="file" value={value} onChange={onChange} id={id} name={name} ref={inpRef} style={{"display": "none"}}/>
             </div>
             <div className="user-name">
                 <p>{userProfile}</p>

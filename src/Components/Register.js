@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Input from './Input';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 
-const Register = ({handleSubmit, user:{msg}}) => {
+const Register = ({handleSubmit, user:{msg, isAuthenticated}}) => {
 
     const passRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     const phoneRegEx = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/
@@ -19,7 +19,7 @@ const Register = ({handleSubmit, user:{msg}}) => {
         },
         validationSchema: Yup.object().shape({
             email: Yup.string().email("Invalid email").required('Required'),
-            password: Yup.string().min(8, "Minimum 8 characters").max(16, "Maximum 16 characters").required('required').matches(passRegEx, 'Password must contain at least one uppercase letter, on lowercase letter, one number and one special character'),
+            password: Yup.string().min(8, "Minimum 8 characters").max(16, "Maximum 16 characters").required('required').matches(passRegEx, 'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character'),
             confirmPassword: Yup.string().oneOf([Yup.ref('password')], "Password is not match").required('Required'),
             name: Yup.string().required('Required'),
             phone: Yup.string().min(10, "Invalid phone").matches(phoneRegEx, 'Invalid phone number').required('Required')
@@ -28,6 +28,11 @@ const Register = ({handleSubmit, user:{msg}}) => {
             await handleSubmit(values.email, values.password, values.name, values.phone); 
         }
     })
+
+     if (isAuthenticated) {
+        return <Redirect to='/' />
+    }
+
 
     const submit = e => {
         if (e.keycode === 13) {
@@ -76,6 +81,7 @@ const Register = ({handleSubmit, user:{msg}}) => {
 
 Register.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
 };
 
 export default Register;

@@ -7,9 +7,11 @@ import Swal from 'sweetalert2';
 export const userLoaded = () => dispatch => {
     if (localStorage.token) {
         const profile = jwt.decode(localStorage.token)
+        const profileData = JSON.stringify(profile);
+        const user = localStorage.setItem('user', profileData);
         dispatch({
             type: Types.USER_LOADED,
-            payload: profile
+            payload: user
         })
     }
     else {
@@ -28,30 +30,50 @@ export const login = (email, password) => async dispatch => {
     };
     const body = JSON.stringify({ email, password });
 
-    try {
-        const res = await api.post("login", body, config);
+    api.post("login", body, config).then(
+        res => {
+            try {
+                // const res = await api.post("login", body, config);
 
-        dispatch(Swal.fire({
-            icon: 'success',
-            title: res.data.msg,
-            showConfirmButton: true,
-        }));
+                
 
-        dispatch({
-            type: Types.LOGIN_SUCCESS,
-            payload: res.data
+                dispatch({
+                    type: Types.LOGIN_SUCCESS,
+                    payload: res.data
+                });
+                dispatch(()=>{
+                    Swal.fire({
+                    icon: 'success',
+                    title: res.data.msg,
+                    showConfirmButton: true,
+                })});
+                dispatch(userLoaded());
+
+            } catch (err) {
+                const errors = err.response.data.msg;
+                dispatch(() => Swal.fire({
+                    icon: 'error',
+                    title: errors,
+                    showConfirmButton: true,
+                }));
+                dispatch({
+                    type: Types.LOGIN_FAIL,
+                })
+
+            }
+        }
+    )
+        .catch((err) => {
+            const errors = err.response.data;
+            dispatch(() => Swal.fire({
+                icon: 'error',
+                title: errors,
+                showConfirmButton: true,
+            }));
+
         });
 
-    } catch (err) {
-        const errors = err.response.data.errors;
-        if (errors) {
-            console.log(errors.msg)
-        }
-        dispatch({
-            type: Types.LOGIN_FAIL,
-        })
 
-    }
 }
 
 // Register
@@ -63,6 +85,8 @@ export const register = (email, password, name, phone) => async dispatch => {
     };
 
     const body = JSON.stringify({ email, password, name, phone });
+
+
 
     try {
         const res = await api.post("register", body, config);
@@ -76,6 +100,7 @@ export const register = (email, password, name, phone) => async dispatch => {
             title: res.data.msg,
             showConfirmButton: true,
         }));
+        dispatch(userLoaded());
     } catch (err) {
         const errors = err.response.data.msg;
         console.log(errors)

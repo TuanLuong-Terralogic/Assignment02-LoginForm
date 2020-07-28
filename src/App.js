@@ -13,13 +13,7 @@ import {userLoaded} from './Action/user';
 import {connect} from 'react-redux';
 // import Loading from './Components/Loading';
 
-
-
-const createBrowserHistory = require ('history').createBrowserHistory;
 const App = ({userLoaded}) => {
-
-  const history = createBrowserHistory();
-  
 
   useEffect(()=> {
     userLoaded();
@@ -27,8 +21,7 @@ const App = ({userLoaded}) => {
 
   return (
     
-      <Router history={history}>
-        {/* <Alert /> */}
+      <Router>
         <Switch>
           <Route path="/" exact component={LoginLayout} />
           <Route path="/register" exact component={RegisterLayout} />

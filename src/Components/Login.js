@@ -61,8 +61,8 @@ const Login = ({ handleSubmit, user: { msg, isAuthenticated, loading }, history 
                             </button>
                         </div>
                         <div className="col-6">
-                            <button type="submit" className="btn btn-login w-100" onClick={handleClick}>
-                                {click ? "...Loading" : "Login"}
+                            <button type="submit" className="btn btn-login w-100">
+                                Login
                             </button>
                         </div>
 

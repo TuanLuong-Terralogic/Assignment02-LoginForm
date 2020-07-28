@@ -22,7 +22,7 @@ const user = (state = initState, action) => {
         case Types.USER_LOADED:
             return {
                 ...state,
-                ...payload,
+                // ...payload,
                 isAuthenticated: true,
                 loading: false,
                 user: payload
@@ -56,7 +56,6 @@ const user = (state = initState, action) => {
                 ...state,
                 token: null,
                 isAuthenticated: false,
-                msg: payload,
                 loading: false,
             }
         default:
