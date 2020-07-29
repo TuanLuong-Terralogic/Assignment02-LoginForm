@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import Input from './Input';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 
 const Login = ({ handleSubmit, user: { msg, isAuthenticated, loading } }) => {
 
-    const [click, setClick] = useState(false);
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -34,12 +33,6 @@ const Login = ({ handleSubmit, user: { msg, isAuthenticated, loading } }) => {
         return <Redirect to='/profile' />
     }
 
-    const handleClick = () => {
-        if (loading) {
-            setClick(!click);
-        }
-        return click
-    }
     // const emailRegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
     // const validateEmail = (email) => {

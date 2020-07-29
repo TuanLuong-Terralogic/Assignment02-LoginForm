@@ -13,7 +13,7 @@ const Avatar = ({ userProfile, value, onChange, name, id }) => {
     return (
         <div className="ava-wrapper">
             <div className="ava-container">
-                <img src={value} alt="avatar" className="avatar" />
+                <img src={!value ? "" : value } alt="avatar" className="avatar" />
                 <img type="file" src={edit} alt="edit pencil" className="edit" onClick={handleClick} />
                 <input type="file" className="form-control-file" onChange={onChange} id={id} name={name} ref={inpRef} style={{ "display": "none" }} />
             </div>

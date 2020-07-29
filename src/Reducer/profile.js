@@ -3,7 +3,8 @@ import * as Types from '../Constant/profile';
 const initState = {
   profile: {},
   msg: '',
-  loading: null
+  loading: null,
+  dataImg: '',
 }
 
 const profile = (state = initState, action) => {
@@ -16,9 +17,9 @@ const profile = (state = initState, action) => {
     case Types.UPLOAD_SUCCESS:
       return {
         ...state,
-        ...action.payload,
         msg: action.payload.msg,
-        loading: false
+        loading: false,
+        dataImg: action.payload
       }
     case Types.UPLOAD_FAIL:
       return {

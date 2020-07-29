@@ -1,5 +1,5 @@
 import * as Types from '../Constant/alert';
-import jwt from 'jsonwebtoken';
+
 const initState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,

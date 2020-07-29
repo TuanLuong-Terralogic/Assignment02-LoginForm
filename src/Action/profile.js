@@ -1,25 +1,28 @@
 import * as Type from '../Constant/profile';
 import api from '../Api';
 import Swal from 'sweetalert2';
+import jwt from 'jsonwebtoken';
 
-export const uploadAvatar = async (file) => dispatch => {
-  const token = localStorage.getItem('token');
-  const config = {
+const token = localStorage.getItem('token');
+const userLocal = jwt.decode(token);
+const config = {
     headers: {
-      'Content-Type': 'multipart/form-data',
+      'Content-Type': 'application/json',
       'Authorization': 'bearer ' + token
     }
   };
 
-  const body = new FormData();
-  body.append('image', file)
+export const uploadAvatar =  (image) => async dispatch => {
+
+  const formData = new FormData();
+  formData.append('image', image);
 
   try {
-    const res = api.post('upload', body, config);
+    const res = await api.post('upload', formData, config);
 
     dispatch({
       type: Type.UPLOAD_SUCCESS,
-      payload: res.data
+      payload: 'http://api.terralogic.ngrok.io/' + res.data.data
     });
 
     dispatch(() => {
@@ -30,7 +33,8 @@ export const uploadAvatar = async (file) => dispatch => {
       });
     })
   } catch (error) {
-    const errors = error.response.data;
+    const errors = error.response;
+    console.log(errors)
     dispatch({
       type: Type.UPLOAD_FAIL
     });
@@ -88,18 +92,16 @@ export const changePassword = (password, currentPassword) => async dispatch => {
 }
 
 // update profile information
-export const updateProfile = (email, name, phone) => async dispatch => {
-  const token = localStorage.getItem('token');
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'bearer ' + token
-    }
-  }
-
-  const body = JSON.stringify({ email, name, phone });
-
+export const updateProfile = ({email, name, phone, avatar}) => async dispatch => {
+  
   try {
+    userLocal.email = email;
+    userLocal.name = name;
+    userLocal.phone = phone;
+    userLocal.avartar = avatar;
+    
+    const body = JSON.stringify({email, name, phone, avatar});
+    
     const res = await api.patch('update', body, config);
 
     dispatch({
@@ -123,10 +125,37 @@ export const updateProfile = (email, name, phone) => async dispatch => {
     dispatch(() => {
       Swal.fire({
         icon: 'error',
-        title: error,
+        title: err,
         showConfirmButton: true
       })
     })
   }
 
+}
+
+// update all
+export const updateAll = ({email, name, phone, avatar, password, currentPassword}) => async dispatch =>{
+  
+  console.log(email, name, phone, avatar, password, currentPassword)
+
+  const update = async () => {
+    const res1 = await updateProfile({email, name, phone, avatar});
+    const res2 = await changePassword({password, currentPassword});
+    // const 
+    return Promise.all([res1, res2]);
+  }
+  try {
+    const resAll = await update();
+
+    dispatch({
+      type: Type.UPDATE_PROFILE_SUCCESS,
+      payload: resAll
+    })
+    
+    
+  } catch (error) {
+    dispatch({
+      type: Type.UPDATE_PROFILE_FAIL,
+    })
+  }
 }

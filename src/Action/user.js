@@ -11,7 +11,7 @@ export const userLoaded = () => dispatch => {
         const user = localStorage.setItem('user', profileData);
         dispatch({
             type: Types.USER_LOADED,
-            payload: user
+            payload: profile
         })
     }
     else {
