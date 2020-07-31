@@ -33,14 +33,6 @@ const Login = ({ handleSubmit, user: { msg, isAuthenticated, loading } }) => {
         return <Redirect to='/profile' />
     }
 
-    // const emailRegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-    // const validateEmail = (email) => {
-    //     if(email !== "") {
-    //         if(email)
-    //     }
-    // }
-
     return (
 
         <div className="form-container">
@@ -65,8 +57,6 @@ const Login = ({ handleSubmit, user: { msg, isAuthenticated, loading } }) => {
                                 Login
                             </button>
                         </div>
-
-
                     </div>
                     <br />
                     <input type="checkbox" className="form-check-input" name="rememberPass" id="rememberPass" value="checkedValue" />

@@ -10,6 +10,7 @@ import { withRouter } from 'react-router-dom';
 const ProfileLayout = ({ profile, user, changePassword, logout, uploadAvatar, updateProfile, updateAll, history }) => {
 
     const handleOnSubmit = async ({ password, currentPassword }) => {
+        console.log(password, currentPassword);
         changePassword({ password, currentPassword });
     }
 
@@ -22,7 +23,6 @@ const ProfileLayout = ({ profile, user, changePassword, logout, uploadAvatar, up
     }
 
     const handleUpdateAll = async ({ email, name, phone, avatar, password, currentPassword }) => {
-        console.log(email, name, phone, avatar, password, currentPassword)
         updateAll({ email, name, phone, avatar, password, currentPassword });
     }
 

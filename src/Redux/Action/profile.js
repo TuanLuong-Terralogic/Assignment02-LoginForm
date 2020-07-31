@@ -50,15 +50,17 @@ export const uploadAvatar = (image) => async dispatch => {
 }
 
 // change password
-export const changePassword = (password, currentPassword) => async dispatch => {
-  const token = localStorage.getItem('token');
+export const changePassword = ({ password, currentPassword }) => async dispatch => {
+  // const token = localStorage.getItem('token');
 
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'bearer ' + token
-    }
-  }
+  // const config = {
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     'Authorization': 'bearer ' + token
+  //   }
+  // }
+
+  console.log(password, currentPassword);
 
   const body = JSON.stringify({ password, currentPassword });
 
@@ -143,14 +145,11 @@ export const updateProfile = ({ email, name, phone, avatar }) => async dispatch 
 // update all
 export const updateAll = ({ email, name, phone, avatar, password, currentPassword }) => async dispatch => {
 
-  console.log(email, name, phone, avatar, password, currentPassword)
-
-
   const res1 = updateProfile({ email, name, phone, avatar });
   const res2 = changePassword({ password, currentPassword });
-  Promise.all([await updateProfile({ email, name, phone, avatar }), await ({ password, currentPassword })])
+
   try {
-    const resAll = await updateAll();
+    const resAll = await Promise.all(res1, res2);
 
     dispatch({
       type: Type.UPDATE_PROFILE_SUCCESS,
