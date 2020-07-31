@@ -23,25 +23,25 @@
         border-bottom-right-radius: $bd-rad-1;
         padding: 33px 92px;
         .ava-wrapper {
-          @include widHei(100%, 80px);
+          @include widHei(100%, 100px);
           display: flex;
           flex-direction: row;
           align-items: center;
           margin-bottom: 30px;
           .ava-container {
-            @include widHei(80px, 80px);
+            @include widHei(100%, 100%);
             position: relative;
-            margin-right: 24px;
+            margin: auto;
             img {
               &.avatar {
-                width: 100%;
+                // width: 100%;
                 border-radius: 50%;
               }
               &.edit {
                 @include widHei(33px, 33px);
                 position: absolute;
                 top: -5px;
-                right: -5px;
+                right: 0;
                 cursor: pointer;
               }
             }
