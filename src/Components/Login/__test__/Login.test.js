@@ -1,12 +1,13 @@
 import React from 'react';
 import Login from '../Login';
-import { shallow, configure } from 'enzyme';
+import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import { render, fireEvent, wait } from '@testing-library/react'
 
 configure({ adapter: new Adapter() });
 
 const props = {
-  handleSubmit: jest.fn(),
+  onSubmit: jest.fn(),
   user: {
     msg: '',
     isAuthenticated: null,
@@ -15,14 +16,34 @@ const props = {
 }
 
 describe('Login', () => {
+  // test('It should be filled', async () => {
+  //   const { container } = render(<Login />);
+  //   const email = container.querySelector('input[name="email"]');
+  //   const password = container.querySelector('input[name="password"]');
+  //   const submit = container.querySelector('button[type="submit"]');
 
-  const component = shallow(<Login {...props} />);
-  const instance = component.instance();
-  const loginClick = jest.spyOn(instance, 'handleSubmit');
-  it('it should login with click', () => {
-    const site = component.find('.btn-login')
-    site.simulate('click');
-    instance.onMouseEnter();
-    expect(loginClick).toHaveBeenCalled();
+  //   props.isAuthenticated = true;
+  //   await wait(() => {
+  //     fireEvent.change(email, {
+  //       target: {
+  //         value: 'luongdoquangtuan@gmail.com'
+  //       }
+  //     });
+  //     fireEvent.change(password, {
+  //       target: {
+  //         value: '123456789@Ab'
+  //       }
+  //     });
+  //   });
+
+  //   await wait(() => {
+  //     fireEvent.click(submit)
+  //   });
+  //   expect(props.onSubmit).toHaveBeenCalled();
+
+  // })\
+  it('it should be rendered', () => {
+    const wrapper = shallow(<Login {...props} />);
+    expect(wrapper.className).toContain('form-container');
   })
 })

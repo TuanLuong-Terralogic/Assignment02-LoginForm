@@ -3,24 +3,16 @@ import PropTypes from 'prop-types';
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import Input from '../Input/Input';
 import * as Yup from 'yup';
-import { useFormik } from 'formik';
+// import { useFormik } from 'formik';
+import { Formik } from 'formik';
 // import Swal from 'sweetalert2';
 
-const Login = ({ handleSubmit, user: { msg, isAuthenticated, loading } }) => {
+const validationSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email format").required('Required'),
+    password: Yup.string().min(8, "Minimum 8 characters").max(16, "Maximum 16 characters").required('Required')
+});
 
-    const formik = useFormik({
-        initialValues: {
-            email: '',
-            password: ''
-        },
-        validationSchema: Yup.object().shape({
-            email: Yup.string().email("Invalid email format").required('Required'),
-            password: Yup.string().min(8, "Minimum 8 characters").max(16, "Maximum 16 characters").required('Required')
-        }),
-        onSubmit: async (values) => {
-            await handleSubmit(values.email, values.password);
-        }
-    })
+const Login = ({ handleSubmit }) => {
 
     const submit = event => {
         if (event.keycode === 13) {
@@ -29,46 +21,57 @@ const Login = ({ handleSubmit, user: { msg, isAuthenticated, loading } }) => {
         }
     }
 
-    if (isAuthenticated) {
-        return <Redirect to='/profile' />
-    }
 
     return (
 
         <div className="form-container">
-            {/* <p>{msg}</p> */}
-            <form onSubmit={formik.handleSubmit} onKeyDown={e => submit}>
+            <Formik
+                initialValues={{
+                    email: '',
+                    password: ''
+                }}
+                validationSchema={validationSchema}
+                onSubmit={async (values) => {
+                    handleSubmit(values.email, values.password);
+                }}
+            >
+                {({ values, errors, touched, handleChange, handleSubmit }) =>
+                    <form onSubmit={handleSubmit} onKeyDown={e => submit}>
 
-                <Input clName="form-group" labelName="Email" name="email" type="email" plHol="Enter your email" value={formik.values.email} onChange={formik.handleChange} />
-                {formik.errors.email && formik.touched.email && (<p className="text-danger">{formik.errors.email}</p>)}
+                        <Input clName="form-group" labelName="Email" name="email" type="email" plHol="Enter your email" value={values.email} onChange={handleChange} />
+                        {errors.email && touched.email && (<p className="text-danger">{errors.email}</p>)}
 
-                <Input clName="form-group" labelName="Password" name="password" type="password" eyeType="eye" value={formik.values.password} onChange={formik.handleChange} plHol="Enter your password" />
-                {formik.errors.password && formik.errors.password && (<p className="text-danger">{formik.errors.password}</p>)}
+                        <Input clName="form-group" labelName="Password" name="password" type="password" eyeType="eye" value={values.password} onChange={handleChange} plHol="Enter your password" />
+                        {errors.password && errors.password && (<p className="text-danger">{errors.password}</p>)}
 
-                <div className="form-group">
-                    <div className="button-row row">
-                        <div className="col-6">
-                            <button type="button" className="btn btn-register w-100">
-                                <Link to="/register" className="register">Register</Link>
-                            </button>
+                        <div className="form-group">
+                            <div className="button-row row">
+                                <div className="col-6">
+                                    <button type="button" className="btn btn-register w-100">
+                                        <a href="/register" className="register">Register</a>
+                                    </button>
+                                </div>
+                                <div className="col-6">
+                                    <button type="submit" className="btn btn-login w-100">
+                                        Login
+                                    </button>
+                                </div>
+                            </div>
+                            <br />
+                            <input type="checkbox" className="form-check-input" name="rememberPass" id="rememberPass" value="checkedValue" />
+                            <label className="form-check-label">Remember password</label>
                         </div>
-                        <div className="col-6">
-                            <button type="submit" className="btn btn-login w-100">
-                                Login
-                            </button>
-                        </div>
-                    </div>
-                    <br />
-                    <input type="checkbox" className="form-check-input" name="rememberPass" id="rememberPass" value="checkedValue" />
-                    <label className="form-check-label">Remember password</label>
-                </div>
-            </form>
+                    </form>
+                }
+
+            </Formik>
+
         </div>
     );
 };
 
 Login.propTypes = {
-    handleSubmit: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func,
 };
 
-export default withRouter(Login);
+export default Login;

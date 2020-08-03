@@ -5,12 +5,18 @@ import Images from '../../Components/Images/Images';
 import { connect } from 'react-redux';
 import { login } from '../../Redux/Action/user';
 import PropTypes from 'prop-types';
+import { Redirect, withRouter } from 'react-router-dom'
 
 
-const LoginLayout = ({ user = {}, login }) => {
+const LoginLayout = ({ user, login }) => {
 
     const handleSubmit = async (email, password) => {
         login(email, password);
+    }
+
+
+    if (user.isAuthenticated) {
+        return <Redirect to='/profile' />
     }
 
     return (
@@ -20,7 +26,7 @@ const LoginLayout = ({ user = {}, login }) => {
                     <div className="col-12 col-md-12 col-lg-12 col-xl-6 col-left">
                         <Logo />
                         <h3>Login Your Account</h3>
-                        <Login handleSubmit={handleSubmit} user={user} isAuthenticated />
+                        <Login handleSubmit={handleSubmit} user={user} />
                     </div>
                     <Images />
                 </div>
@@ -41,4 +47,4 @@ LoginLayout.propTypes = {
     user: PropTypes.object,
 }
 
-export default connect(mapStateToProps, { login })(LoginLayout);
+export default withRouter(connect(mapStateToProps, { login })(LoginLayout));
