@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import edit from '../../Assets/img/edit_photo.svg';
-import ModalUpload from './ModalUpload./ModalUpload';
+import ModalUpload from './ModalUpload/ModalUpload';
 
 const Avatar = ({ userProfile, value, onChange, name, id, handleUploadImage }) => {
 
