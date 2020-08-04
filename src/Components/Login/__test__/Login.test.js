@@ -44,6 +44,6 @@ describe('Login', () => {
   // })\
   it('it should be rendered', () => {
     const wrapper = shallow(<Login {...props} />);
-    // expect(wrapper.className).;
+    expect(wrapper.find('form-container')).toHaveLength(1);
   })
 })

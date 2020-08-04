@@ -36,14 +36,14 @@ const Login = ({ handleSubmit }) => {
                     handleSubmit(values.email, values.password);
                 }}
             >
-                {({ values, errors, touched, handleChange, handleSubmit }) =>
+                {({ values, errors, handleChange, handleSubmit }) =>
                     <form onSubmit={handleSubmit} onKeyDown={e => submit}>
 
                         <Input clName="form-group" labelName="Email" name="email" type="email" plHol="Enter your email" value={values.email} onChange={handleChange} />
-                        {errors.email && touched.email && (<p className="text-danger">{errors.email}</p>)}
+                        {errors.email  && (<p className="text-danger">{errors.email}</p>)}
 
                         <Input clName="form-group" labelName="Password" name="password" type="password" eyeType="eye" value={values.password} onChange={handleChange} plHol="Enter your password" />
-                        {errors.password && errors.password && (<p className="text-danger">{errors.password}</p>)}
+                        {errors.password  && (<p className="text-danger">{errors.password}</p>)}
 
                         <div className="form-group">
                             <div className="button-row row">
