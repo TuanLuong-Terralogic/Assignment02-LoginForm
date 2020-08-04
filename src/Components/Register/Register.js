@@ -60,7 +60,7 @@ const Register = ({ handleSubmit, user: { msg, isAuthenticated } }) => {
                 {formik.errors.phone && formik.touched.phone && (<p className="text-danger">{formik.errors.phone}</p>)}
 
 
-                <div className="form-group">
+                <div className="form-group mb-0">
                     <div className="button-row row">
                         <div className="col-6">
                             <button type="button" className="btn btn-register w-100">
@@ -80,8 +80,8 @@ const Register = ({ handleSubmit, user: { msg, isAuthenticated } }) => {
 };
 
 Register.propTypes = {
-    handleSubmit: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool.isRequired,
+    handleSubmit: PropTypes.func,
+    isAuthenticated: PropTypes.bool,
 };
 
 export default Register;

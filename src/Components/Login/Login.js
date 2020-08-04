@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, withRouter, Redirect } from 'react-router-dom';
+// import { Link, withRouter, Redirect } from 'react-router-dom';
 import Input from '../Input/Input';
 import * as Yup from 'yup';
 // import { useFormik } from 'formik';
 import { Formik } from 'formik';
 // import Swal from 'sweetalert2';
 
+const emailRedEx = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const validationSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email format").required('Required'),
-    password: Yup.string().min(8, "Minimum 8 characters").max(16, "Maximum 16 characters").required('Required')
+    email: Yup.string().email("Invalid email format").required('Required email').matches(emailRedEx, 'Invalid email'),
+    password: Yup.string().min(8, "Minimum 8 characters").max(16, "Maximum 16 characters").required('Required password')
 });
 
 const Login = ({ handleSubmit }) => {

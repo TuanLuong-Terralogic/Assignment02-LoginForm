@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import eye from '../../Assets/img/Suche03.svg';
 import eyeFilled from '../../Assets/img/Suche04.svg';
 
-const Input = ({ clName = "", labelName = "", id = "", type = "", plHol = "", name, eyeType, onChange, value, defaultValue }) => {
+const Input = ({ clName, labelName, id, type, plHol, name, eyeType, onChange, value, defaultValue }) => {
     const [click, setClick] = useState(false);
     // const [isFocused, setIsFocused] = useState(true);
     const handleClick = () => {
