@@ -6,14 +6,14 @@ import PropTypes from 'prop-types'
 
 const UserAuth = ({ component: Component, user: { isAuthenticated, loading }, ...props }) => {
     return (
-        <Route {...props} render={(renderRoute => !isAuthenticated && loading ? (
+        <Route {...props} render={renderRoute => !isAuthenticated && !loading ? (
             <Redirect to="/" />
         )
             :
             (
                 <Component {...renderRoute} />
             )
-        )} />
+        } />
     );
 };
 

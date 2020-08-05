@@ -1,7 +1,8 @@
 .container {
   // width: 95%;
   margin: auto;
-  margin-top: 30px;
+  margin-top: 13px;
+  margin-bottom: 13px;
   .login-container {
     width: 100%;
     margin: auto;
@@ -15,7 +16,7 @@
           text-align: left;
           .brand {
             img {
-              margin-bottom: 20px;
+              margin-bottom: 15px;
             }
             small {
               text-transform: uppercase;
@@ -150,7 +151,7 @@
         &.img-container {
           padding-right: 0;
           img {
-            @include widHei(100%, 697px);
+            @include widHei(100%, 630px);
           }
         }
       }

@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 export const localSave = async profile => {
   const save = jwt.decode(localStorage.getItem('token'));
   // const saveUser = JSON.parse(save);
-  if (profile.avatar !== '') {
+  if (!profile.avatar) {
     save.avatar = profile.avatar;
     save.email = profile.name;
     save.name = profile.name;

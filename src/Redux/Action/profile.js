@@ -1,11 +1,11 @@
 import * as Type from '../Constant/profile';
 import api from '../../Api';
 import Swal from 'sweetalert2';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 import { localSave } from '../../Utils/LocalSave';
 
 const token = localStorage.getItem('token');
-const userLocal = jwt.decode(token);
+// const userLocal = jwt.decode(token);
 const config = {
   headers: {
     'Content-Type': 'application/json',
