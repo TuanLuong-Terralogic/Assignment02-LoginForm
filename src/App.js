@@ -23,7 +23,8 @@ const App = ({ userLoaded }) => {
 
     <Router>
       <Switch>
-        <Route path="/" exact component={LoginLayout} />
+        <Route path='/' exact component={LoginLayout} />
+        {/* <Route path='/login' exact component={LoginLayout} /> */}
         <Route path="/register" exact component={RegisterLayout} />
         <UserAuth path="/profile" exact component={ProfileLayout} />
       </Switch>

@@ -5,8 +5,14 @@ import Images from '../../Components/Images/Images';
 import { register } from '../../Redux/Action/user';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 const RegisterLayout = ({ user, register }) => {
+
+    if (user.isAuthenticated) {
+    return <Redirect to='/' />
+    }
+
 
     const handleSubmit = (email, password, fullName, phone) => {
         register(email, password, fullName, phone);

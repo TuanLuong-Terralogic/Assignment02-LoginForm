@@ -1,4 +1,5 @@
 import * as Types from '../Constant/alert';
+import jwt from 'jsonwebtoken'
 
 const initState = {
     token: localStorage.getItem('token'),
@@ -11,15 +12,9 @@ const initState = {
 const user = (state = initState, action) => {
     const { type, payload } = action
     switch (type) {
-        // case Types.GET_USER:
-        //     return {
-        //         ...state,
-        //         // ...payload,
-        //         isAuthenticated: true,
-        //         loading: false,
-        //         user: payload
-        //     }
         case Types.USER_LOADED:
+            const data = JSON.stringify(jwt.decode(localStorage.getItem('token')));
+            localStorage.setItem('user', data);
             return {
                 ...state,
                 // ...payload,
@@ -32,12 +27,14 @@ const user = (state = initState, action) => {
             return {
                 ...state,
                 ...payload,
-                isAuthenticated: true,
+                // isAuthenticated: false,
                 msg: payload.msg,
-                loading: false
+                // loading: false
             };
         case Types.LOGIN_SUCCESS:
             localStorage.setItem('token', payload.token);
+            const userData = JSON.stringify(jwt.decode(localStorage.getItem('token')));
+            localStorage.setItem('user', userData);
             return {
                 ...state,
                 ...payload,
@@ -47,17 +44,20 @@ const user = (state = initState, action) => {
             };
 
         // case Types.GET_USER_FAIL:
-        case Types.REGISTER_FAIL:
-        case Types.LOGOUT:
+        case Types.REGISTER_FAIL: 
         case Types.AUTH_ERROR:
         case Types.LOGIN_FAIL:
+        case Types.LOGOUT:
             localStorage.removeItem('token');
+            localStorage.removeItem('user');
             return {
                 ...state,
                 token: null,
                 isAuthenticated: false,
                 loading: false,
             }
+        
+       
         default:
             return state;
     }

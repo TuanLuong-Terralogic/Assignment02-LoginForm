@@ -33,11 +33,10 @@ const Profile = ({ profile, user: { loading, isAuthenticated }, handleUpdateProf
                 loading ? <Fragment><Loading /></Fragment> :
                     <Fragment >
                         {
-                            !isAuthenticated ? <Fragment><Loading /></Fragment> :
+                            !isAuthenticated ? <Fragment><Loading /></Fragment> : 
                                 <div className="profile-wrapper">
                                     <Formik
                                         initialValues={{
-                                            avatar: profile.dataImg || userData.avatar,
                                             email: userData.email,
                                             name: userData.name,
                                             phone: userData.phone,

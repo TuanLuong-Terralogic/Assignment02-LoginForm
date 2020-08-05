@@ -5,7 +5,7 @@ import Images from '../../Components/Images/Images';
 import { connect } from 'react-redux';
 import { login } from '../../Redux/Action/user';
 import PropTypes from 'prop-types';
-import { Redirect, withRouter } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 
 const LoginLayout = ({ user, login }) => {
@@ -47,4 +47,4 @@ LoginLayout.propTypes = {
     user: PropTypes.object,
 }
 
-export default withRouter(connect(mapStateToProps, { login })(LoginLayout));
+export default connect(mapStateToProps, { login })(LoginLayout);

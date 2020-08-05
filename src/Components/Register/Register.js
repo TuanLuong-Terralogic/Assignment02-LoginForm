@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -17,12 +17,7 @@ const validationSchema = Yup.object().shape({
     phone: Yup.string().min(10, "Invalid phone").matches(phoneRegEx, 'Invalid phone number').required('Required')
 })
 
-const Register = ({ handleSubmit, user: { msg, isAuthenticated } }) => {
-
-if (isAuthenticated) {
-    return <Redirect to='/' />
-}
-
+const Register = ({ handleSubmit}) => {
 
 const submit = e => {
     if (e.keycode === 13) {
@@ -42,8 +37,9 @@ return (
                 phone: ''
             }}
             validationSchema={validationSchema}
-            onSubmit={async (values) => {
+            onSubmit={async (values, {resetForm}) => {
                 handleSubmit(values.email, values.password, values.name, values.phone);
+                resetForm({ values: '' });
             }}
         >
             {({values, errors, handleSubmit, handleChange}) => 
@@ -86,8 +82,7 @@ return (
 };
 
 Register.propTypes = {
-    handleSubmit: PropTypes.func,
-    isAuthenticated: PropTypes.bool,
+    handleSubmit: PropTypes.func
 };
 
 export default Register;

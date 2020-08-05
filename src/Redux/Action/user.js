@@ -30,52 +30,42 @@ export const login = (email, password) => async dispatch => {
     };
     const body = JSON.stringify({ email, password });
 
-    api.post("login", body, config).then(
-        res => {
-            try {
-                // const res = await api.post("login", body, config);
-
-
-
-                dispatch({
-                    type: Types.LOGIN_SUCCESS,
-                    payload: res.data
-                });
-                dispatch(() => {
-                    Swal.fire({
-                        icon: 'success',
-                        title: res.data.msg,
-                        showConfirmButton: true,
-                    })
-                });
-                dispatch(userLoaded());
-
-            } catch (err) {
-                const errors = err.response.data;
-                dispatch(() => Swal.fire({
-                    icon: 'error',
-                    title: errors,
-                    showConfirmButton: true,
-                }));
-                dispatch({
-                    type: Types.LOGIN_FAIL,
-                })
-
-            }
-        }
-    )
-        .catch((err) => {
-            const errors = err.response.data;
+    try {
+        const res = await api.post('login', body, config);
+        
+        dispatch(() => {
+            Swal.fire({
+                icon: 'success',
+                title: res.data.msg,
+                showConfirmButton: true,
+            })
+        });
+        dispatch({
+            type: Types.LOGIN_SUCCESS,
+            payload: res.data
+        });
+        
+        dispatch(() => userLoaded());
+        
+        
+    } catch (err) {
+        const errors = err.response;
+        if (errors) {
             dispatch(() => Swal.fire({
                 icon: 'error',
-                title: errors,
+                title: errors.data.msg,
                 showConfirmButton: true,
             }));
+        }
+        
+        dispatch({
+            type: Types.LOGIN_FAIL,
+        })
 
-        });
-
-
+    }
 }
+
+
 
 // Register
 export const register = (email, password, name, phone) => async dispatch => {
@@ -87,31 +77,33 @@ export const register = (email, password, name, phone) => async dispatch => {
 
     const body = JSON.stringify({ email, password, name, phone });
 
-
-
     try {
         const res = await api.post("register", body, config);
 
+        dispatch(() => {
+            Swal.fire({
+                icon: 'success',
+                title: res.data.msg,
+                showConfirmButton: true,
+            })
+        });
         dispatch({
             type: Types.REGISTER_SUCCESS,
             payload: res.data
         });
-        dispatch(Swal.fire({
-            icon: 'success',
-            title: res.data.msg,
-            showConfirmButton: true,
-        }));
-        dispatch(userLoaded());
+        // dispatch(userLoaded());
     } catch (err) {
-        const errors = err.response.data.msg;
-        console.log(errors)
-        // if(errors){
-        //     errors.forEach(error => dispatch(setAlert(error, 'danger', 5000)));
-        // }
-
+        const errors = err.response;
+        if (errors) {
+            dispatch(() => Swal.fire({
+                icon: 'error',
+                title: errors.data.msg,
+                showConfirmButton: true,
+            }));
+        }
         dispatch({
-            type: Types.REGISTER_FAIL
-        })
+            type: Types.REGISTER_FAIL,
+        });
     }
 }
 
